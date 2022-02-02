@@ -229,40 +229,6 @@ guides:
           title: Journald logging driver
         - path: /config/containers/logging/splunk/
           title: Splunk logging driver
-    - sectiontitle: Security
-      section:
-      - path: /engine/security/
-        title: Docker security
-      - path: /engine/security/non-events/
-        title: Docker security non-events
-      - path: /engine/security/protect-access/
-        title: Protect the Docker daemon socket
-      - path: /engine/security/certificates/
-        title: Using certificates for repository client verification
-      - sectiontitle: Use trusted images
-        section:
-        - path: /engine/security/trust/
-          title: Overview
-        - path: /engine/security/trust/trust_automation/
-          title: Automation
-        - path: /engine/security/trust/trust_delegation/
-          title: Delegations
-        - path: /engine/security/trust/deploying_notary/
-          title: Deploy Notary
-        - path: /engine/security/trust/trust_key_mng/
-          title: Manage content trust keys
-        - path: /engine/security/trust/trust_sandbox/
-          title: Play in a content trust sandbox
-      - path: /engine/security/antivirus/
-        title: Antivirus software
-      - path: /engine/security/apparmor/
-        title: AppArmor security profiles
-      - path: /engine/security/seccomp/
-        title: Seccomp security profiles
-      - path: /engine/security/userns-remap/
-        title: Isolate containers with a user namespace
-      - path: /engine/security/rootless/
-        title: Rootless mode
     - sectiontitle: Scale your app
       section:
       - path: /engine/swarm/
@@ -407,14 +373,8 @@ guides:
         title: Use the VFS storage driver
 - path: /get-started/resources/
   title: "Educational resources"
-- sectiontitle: Open source at Docker
-  section:
-  - path: /opensource/
-    title: Contribute to documentation
-  - path: /opensource/ways/
-    title: Other ways to contribute
-- path: /docsarchive/
-  title: Documentation archive
+- path: /opensource/
+  title: "Contribute to documentation"
 reference:
 - path: /reference/
   title: Reference documentation
@@ -518,26 +478,6 @@ reference:
         title: docker checkpoint ls
       - path: /engine/reference/commandline/checkpoint_rm/
         title: docker checkpoint rm
-    - sectiontitle: docker cluster
-      section:
-        - path: /engine/reference/commandline/cluster/
-          title: docker cluster
-        - path: /engine/reference/commandline/cluster_backup/
-          title: docker cluster backup
-        - path: /engine/reference/commandline/cluster_create/
-          title: docker cluster create
-        - path: /engine/reference/commandline/cluster_inspect/
-          title: docker cluster inspect
-        - path: /engine/reference/commandline/cluster_ls/
-          title: docker cluster ls
-        - path: /engine/reference/commandline/cluster_restore/
-          title: docker cluster restore
-        - path: /engine/reference/commandline/cluster_rm/
-          title: docker cluster rm
-        - path: /engine/reference/commandline/cluster_update/
-          title: docker cluster update
-        - path: /engine/reference/commandline/cluster_version/
-          title: docker cluster version
     - path: /engine/reference/commandline/commit/
       title: docker commit
     - sectiontitle: docker compose
@@ -592,6 +532,8 @@ reference:
           title: docker compose unpause
         - path: /engine/reference/commandline/compose_up/
           title: docker compose up
+        - path: /engine/reference/commandline/compose_version/
+          title: docker compose version
     - sectiontitle: docker config
       section:
       - path: /engine/reference/commandline/config/
@@ -1200,8 +1142,16 @@ manuals:
           title: Apple silicon
         - path: /desktop/mac/release-notes/
           title: Release notes
-        - path: /desktop/mac/previous-versions/
-          title: Previous versions
+        - sectiontitle: Previous versions
+          section:
+          - path: /desktop/mac/release-notes/3.x/
+            title: Desktop for Mac 3.x
+          - path: /desktop/mac/release-notes/2.x/
+            title: Desktop for Mac 2.x
+          - path: /desktop/mac/release-notes/edge-releases/
+            title: Edge releases
+          - path: /desktop/mac/release-notes/archive/
+            title: Older versions
     - sectiontitle: Windows
       section:
         - path: /desktop/windows/install/
@@ -1216,8 +1166,16 @@ manuals:
           title: Docker Desktop WSL 2 backend
         - path: /desktop/windows/release-notes/
           title: Release notes
-        - path: /desktop/windows/previous-versions/
-          title: Previous versions
+        - sectiontitle: Previous versions
+          section:
+            - path: /desktop/windows/release-notes/3.x/
+              title: Desktop for Windows 3.x
+            - path: /desktop/windows/release-notes/2.x/
+              title: Desktop for Windows 2.x
+            - path: /desktop/windows/release-notes/edge-releases/
+              title: Edge releases
+            - path: /desktop/windows/release-notes/archive/
+              title: Older versions
     - path: /desktop/dashboard/
       title: Dashboard
     - path: /desktop/dev-environments/
@@ -1388,10 +1346,18 @@ manuals:
             title: Recover your Docker Hub account
           - path: /docker-hub/2fa/new-recovery-code/
             title: Generate a new recovery code
+      - sectiontitle: Single-Sign-on
+        section:
+          -  path: /single-sign-on/
+             title: Configure
+          -  path: /single-sign-on/faqs/
+             title: FAQs
   - path: /docker-hub/download-rate-limit/
     title: Download rate limit
   - sectiontitle: Administration
     section:
+     - path: /docker-hub/configure-sign-in/
+       title: Configure sign in
      - path: /docker-hub/image-management/
        title: Advanced Image Management dashboard
      - path: /docker-hub/convert-account/
@@ -1415,6 +1381,45 @@ manuals:
     title: Add seats
   - path: /subscription/remove-seats/
     title: Remove seats
+
+- sectiontitle: Security
+  section:
+  - path: /security/
+    title: Announcements
+  - sectiontitle: Docker Engine security
+    section:
+      - path: /engine/security/
+        title: Overview
+      - path: /engine/security/non-events/
+        title: Docker security non-events
+      - path: /engine/security/protect-access/
+        title: Protect the Docker daemon socket
+      - path: /engine/security/certificates/
+        title: Using certificates for repository client verification
+      - sectiontitle: Use trusted images
+        section:
+        - path: /engine/security/trust/
+          title: Overview
+        - path: /engine/security/trust/trust_automation/
+          title: Automation
+        - path: /engine/security/trust/trust_delegation/
+          title: Delegations
+        - path: /engine/security/trust/deploying_notary/
+          title: Deploy Notary
+        - path: /engine/security/trust/trust_key_mng/
+          title: Manage content trust keys
+        - path: /engine/security/trust/trust_sandbox/
+          title: Play in a content trust sandbox
+      - path: /engine/security/antivirus/
+        title: Antivirus software
+      - path: /engine/security/apparmor/
+        title: AppArmor security profiles
+      - path: /engine/security/seccomp/
+        title: Seccomp security profiles
+      - path: /engine/security/userns-remap/
+        title: Isolate containers with a user namespace
+      - path: /engine/security/rootless/
+        title: Rootless mode
 
 - sectiontitle: Open-source projects
   section:
@@ -1456,110 +1461,8 @@ manuals:
   title: Release notes
 - sectiontitle: Superseded products and tools
   section:
-  - sectiontitle: Docker Machine
-    section:
-    - path: /machine/
-      title: Machine overview
-    - path: /machine/install-machine/
-      title: Install Machine
-    - path: /machine/release-notes/
-      title: Release notes
-    - path: /machine/get-started/
-      title: Get started with a local VM
-    - path: /machine/get-started-cloud/
-      title: Provision hosts in the cloud
-    - sectiontitle: Learn by example
-      section:
-      - path: /machine/examples/ocean/
-        title: Provision Digital Ocean Droplets
-      - path: /machine/examples/aws/
-        title: Provision AWS EC2 instances
-      - path: /machine/concepts/
-        title: Machine concepts and help
-      - sectiontitle: Machine (docker-machine) CLI
-        section:
-        - path: /machine/reference/
-          title: Machine CLI overview
-        - path: /machine/completion/
-          title: Machine command-line completion
-        - path: /machine/reference/active/
-          title: active
-        - path: /machine/reference/config/
-          title: config
-        - path: /machine/reference/create/
-          title: create
-        - path: /machine/reference/env/
-          title: env
-        - path: /machine/reference/help/
-          title: help
-        - path: /machine/reference/inspect/
-          title: inspect
-        - path: /machine/reference/ip/
-          title: ip
-        - path: /machine/reference/kill/
-          title: kill
-        - path: /machine/reference/ls/
-          title: ls
-        - path: /machine/reference/mount/
-          title: mount
-        - path: /machine/reference/provision/
-          title: provision
-        - path: /machine/reference/regenerate-certs/
-          title: regenerate-certs
-        - path: /machine/reference/restart/
-          title: restart
-        - path: /machine/reference/rm/
-          title: rm
-        - path: /machine/reference/scp/
-          title: scp
-        - path: /machine/reference/ssh/
-          title: ssh
-        - path: /machine/reference/start/
-          title: start
-        - path: /machine/reference/status/
-          title: status
-        - path: /machine/reference/stop/
-          title: stop
-        - path: /machine/reference/upgrade/
-          title: upgrade
-        - path: /machine/reference/url/
-          title: url
-      - sectiontitle: Machine drivers
-        section:
-        - path: /machine/drivers/
-          title: Drivers overview
-        - path: /machine/drivers/os-base/
-          title: Driver options and operating system defaults
-        - path: /machine/drivers/aws/
-          title: Amazon Web Services
-        - path: /machine/drivers/digital-ocean/
-          title: Digital Ocean
-        - path: /machine/drivers/exoscale/
-          title: Exoscale
-        - path: /machine/drivers/generic/
-          title: Generic
-        - path: /machine/drivers/gce/
-          title: Google Compute Engine
-        - path: /machine/drivers/soft-layer/
-          title: IBM Softlayer
-        - path: /machine/drivers/azure/
-          title: Microsoft Azure
-        - path: /machine/drivers/hyper-v/
-          title: Microsoft Hyper-V
-        - path: /machine/drivers/openstack/
-          title: OpenStack
-        - path: /machine/drivers/virtualbox/
-          title: Oracle VirtualBox
-        - path: /machine/drivers/rackspace/
-          title: Rackspace
-        - path: /machine/drivers/vm-fusion/
-          title: VMware Fusion
-        - path: /machine/drivers/vm-cloud/
-          title: VMware vCloud Air
-        - path: /machine/drivers/vsphere/
-          title: VMware vSphere
-      - path: /machine/migrate-to-machine/
-        title: Migrate from Boot2Docker to Machine
+  - path: /machine/
+    title: Docker Machine (deprecated)
   - path: /toolbox/
     title: Docker Toolbox (deprecated)
   - path: /kitematic/

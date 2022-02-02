@@ -9,6 +9,14 @@ toc_max: 2
 Here you can learn about the latest changes, new features, bug fixes, and
 known issues for each Docker Hub release.
 
+Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1){: target="_blank" rel="noopener" class="_"} to see what's coming next.
+
+## 2021-11-15
+
+### New
+
+You can now purchase or upgrade to a Docker Business subscription using a credit card. To learn more, see [Upgrade your subscription](../subscription/upgrade.md).
+
 ## 2021-08-31
 
 ### New
@@ -71,8 +79,7 @@ For more information about this feature and for instructions on how to use it, s
 
 ### New feature
 
-The **Repositories** view now shows which images have gone stale because they haven't been 
-pulled or pushed recently. For more information, see [repository tags](repos.md#viewing-repository-tags).
+The **Repositories** view now shows which images have gone stale because they haven't been pulled or pushed recently. For more information, see [repository tags](repos.md#viewing-repository-tags).
 
 # 2020-10-07
 

@@ -5,7 +5,12 @@ title: Install Docker Compose
 toc_max: 2
 ---
 
-You can run Compose on macOS, Windows, and 64-bit Linux.
+> **Accelerating new features in Docker Desktop**
+>
+> Docker Desktop helps you build, share, and run containers easily on Mac and Windows as you do on Linux. Docker handles the complex setup and allows you to focus on writing the code. Thanks to the positive support we received on the [subscription updates](https://www.docker.com/blog/updating-product-subscriptions/){: target="_blank" rel="noopener" class="_" id="dkr_docs_cta"}, we've started working on [Docker Desktop for Linux](https://www.docker.com/blog/accelerating-new-features-in-docker-desktop/){: target="_blank" rel="noopener" class="_" id="dkr_docs_cta"} which is the second-most popular feature request in our public roadmap. If you are interested in early access, sign up for our [Developer Preview program](https://www.docker.com/community/get-involved/developer-preview){: target="_blank" rel="noopener" class="_" id="dkr_docs_cta"}.
+{: .important}
+
+This page contains information on how to install Docker Compose. You can run Compose on macOS, Windows, and 64-bit Linux.
 
 ## Prerequisites
 
@@ -30,11 +35,12 @@ Follow the instructions below to install Compose on Mac, Windows, Windows Server
 Python package manager or installing Compose as a container.
 
 > Install a different version
-> 
+>
 > The instructions below outline installation of the current stable release
 > (**v{{site.compose_version}}**) of Compose. To install a different version of
-> Compose, replace the given release number with the one that you want. Compose
-> releases are also listed and available for direct download on the
+> Compose, replace the given release number with the one that you want. For instructions to install Compose 2.0.0 on Linux, see [Install Compose 2.0.0 on Linux](cli-command.md#install-on-linux).
+>
+> Compose releases are also listed and available for direct download on the
 > [Compose repository release page on GitHub](https://github.com/docker/compose/releases){:target="_blank" rel="noopener" class="_"}.
 > To install a **pre-release** of Compose, refer to the [install pre-release builds](#install-pre-release-builds)
 > section.
@@ -130,7 +136,9 @@ also included below.
     ```
 
     > To install a different version of Compose, substitute `{{site.compose_version}}`
-    > with the version of Compose you want to use.
+    > with the version of Compose you want to use. For instructions on how to
+    > install Compose `{{site.compose_v2_version}}` on Linux, see [Install
+    > Compose 2.0.0 on Linux](../cli-command#install-on-linux)
 
     If you have problems installing with `curl`, see
     [Alternative Install Options](install.md#alternative-install-options) tab above.
@@ -140,8 +148,10 @@ also included below.
     ```console
     $ sudo chmod +x /usr/local/bin/docker-compose
     ```
-    
-> **Note**: If the command `docker-compose` fails after installation, check your path.
+
+> **Note**:
+>
+> If the command `docker-compose` fails after installation, check your path.
 > You can also create a symbolic link to `/usr/bin` or any other directory in your path.
 
 For example:
@@ -184,7 +194,7 @@ tutorial](https://docs.python-guide.org/dev/virtualenvs/) to get
 started.
 
 ```console
-$ pip install docker-compose
+$ pip3 install docker-compose
 ```
 
 If you are not using virtualenv,

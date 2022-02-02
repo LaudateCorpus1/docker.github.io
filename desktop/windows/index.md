@@ -38,11 +38,9 @@ This section explains the configuration options accessible from the **Settings**
 
 ### General
 
-On the **General** tab of the Settings dialog, you can configure when to start and update Docker.
+On the **General** tab, you can configure when to start Docker and specify other settings.
 
-![Settings](../mac/images/menu/prefs-general.png){:width="750px"}
-
-- **Automatically check for updates**: By default, Docker Desktop is configured to check for newer versions automatically. If you have installed Docker Desktop as part of an organization, you may not be able to update Docker Desktop yourself. In that case, [upgrade your existing organization to a Team plan](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade) and clear this checkbox to disable the automatic check for updates.
+![Settings](/images/settings-general.png){:width="750px"}
 
 - **Start Docker when you log in**: Select this option to automatically start Docker Desktop when you log into your Windows machine.
 
@@ -58,32 +56,33 @@ troubleshoot the application. Clear the check box to opt out. Docker may periodi
 
 - **Open Docker Desktop dashboard at startup**: Automatically opens the dashboard when starting Docker Desktop.
 
+- **Use Docker Compose V2**: Select this option to enable the `docker-compose` command to use Docker Compose V2. For more information, see [Docker Compose V2](../../compose/cli-command.md).
+
 ### Resources
 
-The **Resources** tab allows you to configure CPU, memory, disk, proxies, 
-network, and other resources. Different settings are available for 
-configuration depending on whether you are using Linux containers in WSL 2 
+The **Resources** tab allows you to configure CPU, memory, disk, proxies,
+network, and other resources. Different settings are available for
+configuration depending on whether you are using Linux containers in WSL 2
 mode, Linux containers in Hyper-V mode, or Windows containers.
-
-![Resources](images/settings-resources.png){:width="750px"}
 
 #### Advanced
 
 > **Note**
 >
-> The Advanced tab is only available in Hyper-V mode, because in WSL 2 mode and 
-> Windows container mode these resources are managed by Windows. In WSL 2 
+> The Advanced tab is only available in Hyper-V mode, because Windows manages
+> the resources in WSL 2 mode and Windows container mode. In WSL 2
 > mode, you can configure limits on the memory, CPU, and swap size allocated
-> to the [WSL 2 utility VM](https://docs.microsoft.com/en-us/windows/wsl/wsl-config#configure-global-options-with-wslconfig).
+> to the [WSL 2 utility VM](https://docs.microsoft.com/en-us/windows/wsl/wsl-config#configure-global-options-with-wslconfig){:target="_blank"
+class="_"}.
 
 Use the **Advanced** tab to limit resources available to Docker.
 
 - **CPUs**: By default, Docker Desktop is set to use half the number of processors
-available on the host machine. To increase processing power, set this to a
-higher number; to decrease, lower the number.
+available on the host machine. To increase the processing power, set this to a
+higher number. To decrease the processing power, set this to a lower number.
 
 - **Memory**: By default, Docker Desktop is set to use `2` GB runtime memory,
-allocated from the total available memory on your machine. To increase the RAM, set this to a higher number. To decrease it, lower the number.
+allocated from the total available memory on your machine. To increase the RAM, set this to a higher number. To decrease the RAM, lower the number.
 
 - **Swap**: Configure swap file size as needed. The default is 1 GB.
 
@@ -97,8 +96,8 @@ You can also move the disk image to a different location. If you attempt to move
 
 > **Note**
 >
-> The File sharing tab is only available in Hyper-V mode, because in WSL 2 mode 
-> and Windows container mode all files are automatically shared by Windows.
+> The File sharing tab is only available in Hyper-V mode because the files
+> are automatically shared in WSL 2 mode and Windows container mode.
 
 Use File sharing to allow local directories on Windows to be shared with Linux containers.
 This is especially useful for
@@ -128,7 +127,7 @@ File share settings are:
  * Docker Desktop sets permissions to read/write/execute for users, groups and others [0777 or a+rwx](http://permissions-calculator.org/decode/0777/).
    This is not configurable. See [Permissions errors on data directories for shared volumes](troubleshoot.md#permissions-errors-on-data-directories-for-shared-volumes).
 >
- * Windows presents a case-insensitive view of the filesystem to applications while Linux is case-sensitive. On Linux it is possible to create 2 separate files: `test` and `Test`, while on Windows these filenames would actually refer to the same underlying file. This can lead to problems where an app works correctly on a developer Windows machine (where the file contents are shared) but fails when run in Linux in production (where the file contents are distinct). To avoid this, Docker Desktop insists that all shared files are accessed as their original case. Therefore if a file is created called `test`, it must be opened as `test`. Attempts to open `Test` will fail with "No such file or directory". Similarly once a file called `test` is created, attempts to create a second file called `Test` will fail.
+ * Windows presents a case-insensitive view of the filesystem to applications while Linux is case-sensitive. On Linux, it is possible to create two separate files: `test` and `Test`, while on Windows these filenames would actually refer to the same underlying file. This can lead to problems where an app works correctly on a developer Windows machine (where the file contents are shared) but fails when run in Linux in production (where the file contents are distinct). To avoid this, Docker Desktop insists that all shared files are accessed as their original case. Therefore if a file is created called `test`, it must be opened as `test`. Attempts to open `Test` will fail with "No such file or directory". Similarly once a file called `test` is created, attempts to create a second file called `Test` will fail.
 
 #### Shared folders on demand
 
@@ -138,7 +137,7 @@ If you run a Docker command from a shell with a volume mount (as shown in the
 example below) or kick off a Compose file that includes volume mounts, you get a
 popup asking if you want to share the specified folder.
 
-You can select to **Share it**, in which case it is added your Docker Desktop Shared Folders list and available to
+You can select to **Share it**, in which case it is added to your Docker Desktop Shared Folders list and available to
 containers. Alternatively, you can opt not to share it by selecting **Cancel**.
 
 ![Shared folder on demand](images/shared-folder-on-demand.png){:width="600px"}
@@ -154,7 +153,7 @@ If you wish to set the proxy settings for your containers, you need to define
 environment variables for them, just like you would do on Linux, for example:
 
 ```ps
-> docker run -e HTTP_PROXY=https://proxy.example.com:3128 alpine env
+> docker run -e HTTP_PROXY=http://proxy.example.com:3128 alpine env
 
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 HOSTNAME=b7edf988b2b5
@@ -170,8 +169,8 @@ see [Set environment variables](/engine/reference/commandline/run/#set-environme
 
 > **Note**
 >
-> The Network tab is not available in Windows container mode because networking is 
-> managed by Windows.
+> The Network tab is not available in the Windows container mode because
+> Windows manages networking.
 
 You can configure Docker Desktop networking to work on a virtual private network (VPN). Specify a network address translation (NAT) prefix and subnet mask to enable Internet connectivity.
 
@@ -270,6 +269,29 @@ that you can test deploying your Docker workloads on Kubernetes. To enable Kuber
 
 For more information about using the Kubernetes integration with Docker Desktop, see [Deploy on Kubernetes](../kubernetes.md){:target="_blank" rel="noopener" class="_"}.
 
+### Software Updates
+
+The **Software Updates** section notifies you of any updates available to Docker Desktop. When there's a new update, you can choose to download the update right away, or click the **Release Notes** option to learn what's included in the updated version.
+
+> **Disable automatic check for updates**
+>
+> Starting with Docker Desktop 4.2.0, the option to turn off the automatic check for updates is available for users on all Docker subscriptions, including Docker Personal and Docker Pro. Update to [Docker Desktop 4.2.0](../windows/release-notes/index.md) to start using this feature.
+{: .important}
+
+Turn off the check for updates by clearing the **Automatically Check for Updates** check box. This disables notifications in the Docker menu and also the notification badge that appears on the Docker Dashboard. To check for updates manually, select the **Check for updates** option in the Docker menu.
+
+To allow Docker Desktop to automatically download new updates in the background, select **Always download updates**. This downloads newer versions of Docker Desktop when an update becomes available. After downloading the update, click **Apply and Restart** to install the update. You can do this either through the Docker menu or in the **Updates** section in the Docker Dashboard.
+
+## Dashboard
+
+The Docker Dashboard enables you to interact with containers and applications and manage the lifecycle of your applications directly from your machine. The Dashboard UI shows all running, stopped, and started containers with their state. It provides an intuitive interface to perform common actions to inspect and manage containers and existing Docker Compose applications. For more information, see [Docker Dashboard](../dashboard.md).
+
+## Add TLS certificates
+
+You can add trusted Certificate Authorities (CAs) (used to verify registry
+server certificates) and client certificates (used to authenticate to
+registries) to your Docker daemon.
+
 ### Reset
 
 The **Restart Docker Desktop** and **Reset to factory defaults** options are now available on the **Troubleshoot** menu. For information, see [Logs and Troubleshooting](troubleshoot.md).
@@ -324,7 +346,7 @@ again when you switch back.
 
 ## Dashboard
 
-The Docker Desktop Dashboard enables you to interact with containers and applications and manage the lifecycle of your applications directly from your machine. The Dashboard UI shows all running, stopped, and started containers with their state. It provides an intuitive interface to perform common actions to inspect and manage containers and Docker Compose applications. For more information, see [Docker Desktop Dashboard](../dashboard.md).
+The Docker Dashboard enables you to interact with containers and applications and manage the lifecycle of your applications directly from your machine. The Dashboard UI shows all running, stopped, and started containers with their state. It provides an intuitive interface to perform common actions to inspect and manage containers and Docker Compose applications. For more information, see [Docker Desktop Dashboard](../dashboard.md).
 
 ## Docker Hub
 
@@ -352,6 +374,26 @@ After you have enabled two-factor authentication:
 ![Docker Desktop 2FA](images/desktop-win-2fa.png){:width="500px"}
 
 After you have successfully authenticated, you can access your organizations and repositories directly from the Docker Desktop menu.
+
+## Pause/Resume
+
+Starting with the Docker Desktop 4.2 release, you can pause your Docker Desktop session when you are not actively using it and save CPU resources on your machine. When you pause Docker Desktop, the Linux VM running Docker Engine will be paused, the current state of all your containers are saved in memory, and all processes are frozen. This reduces the CPU usage and helps you retain a longer battery life on your laptop. You can resume Docker Desktop when you want by clicking the Resume option.
+
+> **Note**
+>
+> The Pause/Resume feature is currently not available in the Windows containers mode.
+
+To pause Docker Desktop, right-click the Docker icon in the notifications area (or System tray) and then click **Pause**.
+
+![Docker Desktop popup menu](images/docker-menu-settings.png){:width="300px"}
+
+Docker Desktop now displays the paused status on the Docker menu and on all screens on the Docker Dashboard. You can still access the **Preferences** and the **Troubleshoot** menu from the Dashboard when you've paused Docker Desktop.
+
+Select ![whale menu](images/whale-x.png){: .inline} > **Resume** to resume Docker Desktop.
+
+> **Note**
+>
+> When Docker Desktop is paused, running any commands in the Docker CLI will automatically resume Docker Desktop.
 
 ## Adding TLS certificates
 

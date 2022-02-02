@@ -87,7 +87,7 @@ def hello_world():
   return 'Hello, Docker!'
 
 @app.route('/widgets')
-def get_widgets() :
+def get_widgets():
   mydb = mysql.connector.connect(
     host="mysqldb",
     user="root",
@@ -147,7 +147,7 @@ First, let’s add the `mysql-connector-python` module to our application using 
 
 ```console
 $ pip3 install mysql-connector-python
-$ pip3 freeze > requirements.txt
+$ pip3 freeze | grep mysql-connector-python >> requirements.txt
 ```
 
 Now we can build our image.

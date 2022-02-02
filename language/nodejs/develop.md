@@ -60,7 +60,7 @@ server.use( '/', mocks.server( server.Router(), false, false ) )
 server.start()
 ```
 
-We’ve add the `ronin-database` module and we updated the code to connect to the database and set the in-memory flag to false. We now need to rebuild our image so it contains our changes.
+We’ve added the `ronin-database` module and we updated the code to connect to the database and set the in-memory flag to false. We now need to rebuild our image so it contains our changes.
 
 First let’s add the `ronin-database` module to our application using npm.
 
@@ -82,7 +82,7 @@ $ docker run \
   --network mongodb \
   --name rest-server \
   -p 8000:8000 \
-  -e CONNECTIONSTRING=mongodb://mongodb:27017/yoda_notes \
+  -e CONNECTIONSTRING=mongodb://mongodb:27017/notes \
   node-docker
 ```
 

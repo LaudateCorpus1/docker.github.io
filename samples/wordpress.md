@@ -62,7 +62,7 @@ Compose to set up and run WordPress. Before starting, make sure you have
           - "8000:80"
         restart: always
         environment:
-          WORDPRESS_DB_HOST: db:3306
+          WORDPRESS_DB_HOST: db
           WORDPRESS_DB_USER: wordpress
           WORDPRESS_DB_PASSWORD: wordpress
           WORDPRESS_DB_NAME: wordpress
@@ -124,10 +124,6 @@ administrator.
 > **Note**: The WordPress site is not immediately available on port `8000`
 because the containers are still being initialized and may take a couple of
 minutes before the first load.
-
-If you are using [Docker Machine](../machine/index.md), you can run the command
-`docker-machine ip MACHINE_VM` to get the machine address, and then open
-`http://MACHINE_VM_IP:8000` in a web browser.
 
 If you are using Docker Desktop for Mac or Docker Desktop for Windows, you can use
 `http://localhost` as the IP address, and open `http://localhost:8000` in a web

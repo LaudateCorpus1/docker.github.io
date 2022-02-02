@@ -21,7 +21,7 @@ writable layer of a container. The container's writable layer does not persist
 after the container is deleted, but is suitable for storing ephemeral data that
 is generated at runtime. Storage drivers are optimized for space efficiency, but
 (depending on the storage driver) write speeds are lower than native file system
-performance, especially for storage drivers that a use copy-on-write filesystem.
+performance, especially for storage drivers that use a copy-on-write filesystem.
 Write-intensive applications, such as database storage, are impacted by a
 performance overhead, particularly if pre-existing data exists in the read-only
 layer.
@@ -339,7 +339,7 @@ layers are the same.
 
     {% raw %}
     ```console
-    $ docker image inspect --format "{{json .RootFS.Layers}}" acme/my-final-image:1.0
+    $ docker image inspect --format "{{json .RootFS.Layers}}" acme/my-base-image:1.0
     [
       "sha256:72e830a4dff5f0d5225cdc0a320e85ab1ce06ea5673acfe8d83a7645cbd0e9cf",
       "sha256:07b4a9068b6af337e8b8f1f1dae3dd14185b2c0003a9a1f0a6fd2587495b204a"
@@ -349,7 +349,7 @@ layers are the same.
 
     {% raw %}
     ```console
-    $ docker image inspect --format "{{json .RootFS.Layers}}" acme/my-base-image:1.0
+    $ docker image inspect --format "{{json .RootFS.Layers}}" acme/my-final-image:1.0
     [
       "sha256:72e830a4dff5f0d5225cdc0a320e85ab1ce06ea5673acfe8d83a7645cbd0e9cf",
       "sha256:07b4a9068b6af337e8b8f1f1dae3dd14185b2c0003a9a1f0a6fd2587495b204a",
@@ -475,7 +475,7 @@ examines how much room they take up.
     > consumed by a container's writable layer, it does not include information
     > about metadata and log-files stored for each container.
     >
-    > More details can be obtained my exploring the Docker Daemon's storage location
+    > More details can be obtained by exploring the Docker Daemon's storage location
     > (`/var/lib/docker` by default).
     >
     > ```console

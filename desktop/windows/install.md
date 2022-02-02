@@ -12,11 +12,20 @@ redirect_from:
 - /install/windows/ee-preview/
 ---
 
+> **Update to the Docker Desktop terms**
+>
+> Commercial use of Docker Desktop in larger enterprises (more than 250
+> employees OR more than $10 million USD in annual revenue) now requires a paid
+> subscription. The grace period for those that will require a paid subscription
+> ends on January 31, 2022. [Learn more](https://www.docker.com/blog/the-grace-period-for-the-docker-subscription-service-agreement-ends-soon-heres-what-you-need-to-know/){:
+ target="_blank" rel="noopener" class="_" id="dkr_docs_cta"}.
+{: .important}
+
 Welcome to Docker Desktop for Windows. This page contains information about Docker Desktop for Windows system requirements, download URL, instructions to install and update Docker Desktop for Windows.
 
 > Download Docker Desktop for Windows
 >
-> [Docker Desktop for Windows](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe){: .button .primary-btn }
+> [Docker Desktop for Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe){: .button .primary-btn }
 
 ## System requirements
 
@@ -31,11 +40,12 @@ Your Windows machine must meet the following requirements to successfully instal
 
 ### WSL 2 backend
 
+- Windows 11 64-bit: Home or Pro version 21H2 or higher, or Enterprise or Education version 21H2 or higher.
 - Windows 10 64-bit: Home or Pro 2004 (build 19041) or higher, or Enterprise or Education 1909 (build 18363) or higher.
 - Enable the WSL 2 feature on Windows. For detailed instructions, refer to the
     [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10){: target="_blank" rel="noopener" class="_"}.
 - The following hardware prerequisites are required to successfully run
-WSL 2 on Windows 10:
+WSL 2 on Windows 10 or Windows 11:
 
   - 64-bit processor with [Second Level Address Translation (SLAT)](https://en.wikipedia.org/wiki/Second_Level_Address_Translation){: target="_blank" rel="noopener" class="_"}
   - 4GB system RAM
@@ -49,9 +59,10 @@ WSL 2 on Windows 10:
 
 ### Hyper-V backend and Windows containers
 
+- Windows 11 64-bit: Pro version 21H2 or higher, or Enterprise or Education version 21H2 or higher.
 - Windows 10 64-bit: Pro 2004 (build 19041) or higher, or Enterprise or Education 1909 (build 18363) or higher.
 
-  For Windows 10 Home, see [System requirements for WSL 2 backend](#wsl-2-backend).
+  For Windows 10 and Windows 11 Home, see [System requirements for WSL 2 backend](#wsl-2-backend).
 - Hyper-V and Containers Windows features must be enabled.
 - The following hardware prerequisites are required to successfully run Client
 Hyper-V on Windows 10:
@@ -68,14 +79,6 @@ Hyper-V on Windows 10:
 > **Note**
 >
 > Docker only supports Docker Desktop on Windows for those versions of Windows 10 that are still within [Microsoft’s servicing timeline](https://support.microsoft.com/en-us/help/13853/windows-lifecycle-fact-sheet){:target="_blank" rel="noopener" class="_"}.
-
-### What's included in the installer
-
-The Docker Desktop installation includes [Docker Engine](../../engine/index.md),
-Docker CLI client, [Docker Compose](../../compose/index.md),
-[Docker Content Trust](../../engine/security/trust/index.md),
-[Kubernetes](https://github.com/kubernetes/kubernetes/),
-and [Credential Helper](https://github.com/docker/docker-credential-helpers/).
 
 Containers and images created with Docker Desktop are shared between all
 user accounts on machines where it is installed. This is because all Windows
@@ -112,7 +115,7 @@ Looking for information on using Windows containers?
 
 4. When the installation is successful, click **Close** to complete the installation process.
 
-5. If your admin account is different to your user account, you must add the user to the **docker-users** group. Run **Computer Management** as an administrator and navigate to **Local Users and Groups** > **Groups** > **docker-users**. Right-click to add the user to the group.
+5. If your admin account is different to your user account, you must add the user to the **docker-users** group. Run **Computer Management** as an **administrator** and navigate to **Local Users and Groups** > **Groups** > **docker-users**. Right-click to add the user to the group.
 Log out and log back in for the changes to take effect.
 
 ## Start Docker Desktop
@@ -134,7 +137,7 @@ Docker Desktop does not start automatically after installation. To start Docker 
     > If you do not agree to the updated terms, the Docker Desktop application will close and  you can no longer run Docker Desktop on your machine. You can choose to accept the terms at a later date by opening Docker Desktop.
     {: .important}
 
-    For more information, see [Docker Desktop License Agreement](/subscription/#docker-desktop-license-agreement).
+    For more information, see [Docker Desktop License Agreement](../../subscription/index.md#docker-desktop-license-agreement). We recommend that you also read the [Blog](https://www.docker.com/blog/updating-product-subscriptions/){: target="_blank" rel="noopener" class="_" id="dkr_docs_desktop_install_btl"} and [FAQs](https://www.docker.com/pricing/faq){: target="_blank" rel="noopener" class="_" id="dkr_docs_desktop_install_btl"} to learn how companies using Docker Desktop may be affected.
 
 ### Quick Start Guide
 
@@ -173,5 +176,5 @@ To uninstall Docker Desktop from your Windows machine:
 * [Troubleshooting](troubleshoot.md) describes common problems, workarounds, and
   how to get support.
 * [FAQs](../faqs.md) provide answers to frequently asked questions.
-* [Release notes](release-notes.md) lists component updates, new features, and improvements associated with Docker Desktop releases.
+* [Release notes](release-notes/index.md) lists component updates, new features, and improvements associated with Docker Desktop releases.
 * [Back up and restore data](../backup-and-restore.md) provides instructions on backing up and restoring data related to Docker.

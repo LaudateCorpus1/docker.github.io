@@ -116,27 +116,23 @@ To view the contents of the diagnostic file, run:
 $ open /tmp/BE9AFAAF-F68B-41D0-9D12-84760E6B8740/20190905152051.zip
 ```
 
-### Experimental self-diagnose tool
+### Self-diagnose tool
 
-Docker Desktop 3.6.0 contains an experimental "self-diagnose" tool which helps identify some common
-problems. To run it: first locate `com.docker.diagnose`. If you have installed Docker Desktop
-in the Applications directory, then it is located at
+Docker Desktop contains a self-diagnose tool which helps you to identify some common problems. Before you run the self-diagnose tool, locate `com.docker.diagnose`. If you have installed Docker Desktop
+in the Applications directory, then the self-diagnose tool will be located at
 `/Applications/Docker.app/Contents/MacOS/com.docker.diagnose`.
 
-To run the self-diagnose tool:
+To run the self-diagnose tool, run:
 
 ```console
 $ /Applications/Docker.app/Contents/MacOS/com.docker.diagnose check
 ```
 
-The tool runs a suite of checks and displays **PASS** or **FAIL** next to each one. If there are any failures, it highlights the most relevant at the end.
-it will try to highlight the most relevant at the end.
+The tool runs a suite of checks and displays **PASS** or **FAIL** next to each check. If there are any failures, it highlights the most relevant at the end of the report.
 
-> **Note**
+> **Feedback**
 >
-> The Self-diagnose tool is still experimental. Let us know your feedback by creating an issue in the [for-mac](https://github.com/docker/for-mac/issues) GitHub repository.
-
-The Self-diagnose tool is still experimental. Let us know your feedback by creating an issue in the [for-mac](https://github.com/docker/for-mac/issues) GitHub repository.
+> Let us know your feedback on the self-diagnose tool by creating an issue in the [for-mac](https://github.com/docker/for-mac/issues) GitHub repository.
 
 <a name="logs"></a>
 
@@ -253,8 +249,7 @@ in the Apple documentation, and Docker Desktop [Mac system requirements](install
   * Run the uninstall commands from the menu.
 
 * If `docker` commands aren't working properly or as expected, you may need to
-  unset some environment variables, to make sure you are not using the legacy
-  Docker Machine environment in your shell or command window. Unset the
+  unset some environment variables, to make sure you are not using the deprecated Docker Machine environment in your shell or command window. Unset the
   `DOCKER_HOST` environment variable and related variables. If you use bash, use the following command: `unset ${!DOCKER_*}`
 
 * For the `hello-world-nginx` example, Docker Desktop must be running to get to
@@ -279,19 +274,11 @@ in the Apple documentation, and Docker Desktop [Mac system requirements](install
 
   * Some VPN clients can prevent the VM running Docker from communicating with the host, preventing Docker Desktop starting correctly. See [docker/for-mac#5208](https://github.com/docker/for-mac/issues/5208).
 
-    This is an interaction between `vmnet.framework` (as used by `virtualization.framework` in Big Sur) and the VPN clients.
+    This is an interaction between `vmnet.framework` (as used by `virtualization.framework`) and the VPN clients.
 
-  * Docker Desktop is incompatible with macOS Internet Sharing. See [docker/for-mac#5348](https://github.com/docker/for-mac/issues/5348).
+  * Some container disk I/O is much slower than expected. See [docker/for-mac#5389](https://github.com/docker/for-mac/issues/5389). Disk flushes are particularly slow due to the need to guarantee data is written to stable storage on the host. We have also observed specific performance problems when using the `virtualization.framework` on Intel chips on MacOS Monterey.
 
-    This is an interaction between `vmnet.framework` (as used by `virtualization.framework` in Big Sur) and macOS Internet Sharing. At the moment it is not possible to use Docker Desktop and macOS Internet Sharing at the same time.
-
-  * Some container disk I/O is much slower than expected. See [docker/for-mac#5389](https://github.com/docker/for-mac/issues/5389). Disk flushes are particularly slow due to the need to guarantee data is written to stable storage on the host.
-
-    This is an artifact of the new `virtualization.framework` in Big Sur.
-
-  * TCP and UDP port 53 (DNS) are bound on the host when Docker Desktop starts. Therefore you cannot bind to port 53 on all interfaces with a command like `docker run -p 53:53`. See [docker/for-mac#5335](https://github.com/docker/for-mac/issues/5335).
-
-    This is an artifact of the new `virtualization.framework` in Big Sur. A workaround is to bind to a specific IP address e.g. `docker run -p 127.0.0.1:53:53`.
+    This is an artifact of the new `virtualization.framework`. 
 
   * The Linux Kernel may occasionally crash. Docker now detects this problem and pops up an error dialog offering the user the ability to quickly restart Linux.
 

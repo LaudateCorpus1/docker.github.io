@@ -22,6 +22,173 @@ for Docker Engine.
 
 # Version 20.10
 
+## 20.10.12
+2021-12-13
+
+This release of Docker Engine contains changes in packaging only, and provides
+updates to the `docker scan` and `docker buildx` commands. Versions of `docker scan`
+before v0.11.0 are not able to detect the [Log4j 2 CVE-2021-44228](https://nvd.nist.gov/vuln/detail/CVE-2021-44228).
+We are shipping an updated version of `docker scan` in this release to help you
+scan your images for this vulnerability.
+
+> **Note**
+>
+> The `docker scan` command on Linux is currently only supported on x86 platforms.
+> We do not yet provide a package for other hardware architectures on Linux.
+
+The `docker scan` feature is provided as a separate package and, depending on your
+upgrade or installation method, 'docker scan' may not be updated automatically to
+the latest version. Use the instructions below to update `docker scan` to the latest
+version. You can also use these instructions to install, or upgrade the `docker scan`
+package without upgrading the Docker Engine:
+
+On `.deb` based distros, such as Ubuntu and Debian:
+
+```console
+$ apt-get update && apt-get install docker-scan-plugin
+```
+
+On rpm-based distros, such as CentOS or Fedora:
+
+```console
+$ yum install docker-scan-plugin
+```
+
+After upgrading, verify you have the latest version of `docker scan` installed:
+
+```console
+$ docker scan --accept-license --version
+Version:    v0.12.0
+Git commit: 1074dd0
+Provider:   Snyk (1.790.0 (standalone))
+```
+
+[Read our blog post on CVE-2021-44228](https://www.docker.com/blog/apache-log4j-2-cve-2021-44228/)
+to learn how to use the `docker scan` command to check if images are vulnerable.
+
+### Packaging
+
+- Update `docker scan` to [v0.12.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.12.0).
+- Update `docker buildx` to [v0.7.1](https://github.com/docker/buildx/releases/tag/v0.7.1).
+- Update Golang runtime to Go 1.16.12.
+
+
+## 20.10.11
+2021-11-17
+
+> **IMPORTANT**
+>
+> Due to [net/http changes](https://github.com/golang/go/issues/40909) in [Go 1.16](https://golang.org/doc/go1.16#net/http),
+> HTTP proxies configured through the `$HTTP_PROXY` environment variable are no
+> longer used for TLS (`https://`) connections. Make sure you also set an `$HTTPS_PROXY`
+> environment variable for handling requests to `https://` URLs.
+>
+> Refer to the [HTTP/HTTPS proxy section](../../config/daemon/systemd.md#httphttps-proxy)
+> to learn how to configure the Docker Daemon to use a proxy server.
+{: .important }
+
+
+### Distribution
+
+- Handle ambiguous OCI manifest parsing to mitigate [CVE-2021-41190](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-41190) / [GHSA-mc8v-mgrf-8f4m](https://github.com/opencontainers/distribution-spec/security/advisories/GHSA-mc8v-mgrf-8f4m).
+  See [GHSA-xmmx-7jpf-fx42](https://github.com/moby/moby/security/advisories/GHSA-xmmx-7jpf-fx42) for details.
+
+### Windows
+
+- Fix panic.log file having read-only attribute set [moby/moby#42987](https://github.com/moby/moby/pull/42987).
+
+### Packaging
+
+- Update containerd to [v1.4.12](https://github.com/containerd/containerd/releases/tag/v1.4.12) to mitigate [CVE-2021-41190](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-41190).
+- Update Golang runtime to Go 1.16.10.
+
+
+## 20.10.10
+2021-10-25
+
+> **IMPORTANT**
+>
+> Due to [net/http changes](https://github.com/golang/go/issues/40909) in [Go 1.16](https://golang.org/doc/go1.16#net/http),
+> HTTP proxies configured through the `$HTTP_PROXY` environment variable are no
+> longer used for TLS (`https://`) connections. Make sure you also set an `$HTTPS_PROXY`
+> environment variable for handling requests to `https://` URLs.
+>
+> Refer to the [HTTP/HTTPS proxy section](../../config/daemon/systemd.md#httphttps-proxy)
+> to learn how to configure the Docker Daemon to use a proxy server.
+{: .important }
+
+
+### Builder
+
+- Fix platform-matching logic to fix `docker build` using not finding images in
+  the local image cache on Arm machines when using BuildKit [moby/moby#42954](https://github.com/moby/moby/pull/42954)
+
+### Runtime
+
+- Add support for `clone3` syscall in the default seccomp policy to support running
+  containers based on recent versions of Fedora and Ubuntu. [moby/moby/#42836](https://github.com/moby/moby/pull/42836).
+- Windows: update hcsshim library to fix a bug in sparse file handling in container
+  layers, which was exposed by recent changes in Windows [moby/moby#42944](https://github.com/moby/moby/pull/42944).
+- Fix some situations where `docker stop` could hang forever [moby/moby#42956](https://github.com/moby/moby/pull/42956).
+
+### Swarm
+
+- Fix an issue where updating a service did not roll back on failure [moby/moby#42875](https://github.com/moby/moby/pull/42875).
+
+### Packaging
+
+- Add packages for Ubuntu 21.10 "Impish Indri" and Fedora 35.
+- Update `docker scan` to v0.9.0
+- Update Golang runtime to Go 1.16.9.
+
+## 20.10.9
+2021-10-04
+
+This release is a security release with security fixes in the CLI, runtime, as
+well as updated versions of the containerd.io package.
+
+> **IMPORTANT**
+>
+> Due to [net/http changes](https://github.com/golang/go/issues/40909) in [Go 1.16](https://golang.org/doc/go1.16#net/http),
+> HTTP proxies configured through the `$HTTP_PROXY` environment variable are no
+> longer used for TLS (`https://`) connections. Make sure you also set an `$HTTPS_PROXY`
+> environment variable for handling requests to `https://` URLs.
+>
+> Refer to the [HTTP/HTTPS proxy section](../../config/daemon/systemd.md#httphttps-proxy)
+> to learn how to configure the Docker Daemon to use a proxy server.
+{: .important }
+
+### Client
+
+- [CVE-2021-41092](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-41092)
+  Ensure default auth config has address field set, to prevent credentials being
+  sent to the default registry.
+
+### Runtime
+
+- [CVE-2021-41089](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-41089)
+  Create parent directories inside a chroot during `docker cp` to prevent a specially
+  crafted container from changing permissions of existing files in the host’s filesystem.
+- [CVE-2021-41091](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-41091)
+  Lock down file permissions to prevent unprivileged users from discovering and
+  executing programs in `/var/lib/docker`.
+
+### Packaging
+
+> **Known issue**
+>
+> The `ctr` binary shipping with the static packages of this release is not
+> statically linked, and will not run in Docker images using alpine as a base
+> image. Users can install the `libc6-compat` package, or download a previous
+> version of the `ctr` binary as a workaround. Refer to the containerd ticket
+> related to this issue for more details: [containerd/containerd#5824](https://github.com/containerd/containerd/issues/5824).
+
+- Update Golang runtime to Go 1.16.8, which contains fixes for [CVE-2021-36221](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-36221)
+  and [CVE-2021-39293](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-39293)
+- Update static binaries and containerd.io rpm and deb packages to containerd
+  v1.4.11 and runc v1.0.2 to address [CVE-2021-41103](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-41103).
+- Update the bundled buildx version to v0.6.3 for rpm and deb packages.
+
 ## 20.10.8
 2021-08-03
 
@@ -35,6 +202,7 @@ for Docker Engine.
 > Refer to the [HTTP/HTTPS proxy section](../../config/daemon/systemd.md#httphttps-proxy)
 > to learn how to configure the Docker Daemon to use a proxy server.
 {: .important }
+
 ### Deprecation
 
 - Deprecate support for encrypted TLS private keys. Legacy PEM encryption as

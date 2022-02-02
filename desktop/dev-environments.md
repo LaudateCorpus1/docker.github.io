@@ -22,8 +22,8 @@ To access Dev Environments, from the Docker menu, select **Dashboard** > **Dev E
 
 Dev Environments are available as part of Docker Desktop 3.5.0 release. Download and install **Docker Desktop 3.5.0** or higher:
 
-- [Mac](mac/release-notes.md)
-- [Windows](windows/release-notes.md)
+- [Mac](mac/release-notes/index.md)
+- [Windows](windows/release-notes/index.md)
 
 To get started with Dev Environments, you must have the following tools and extension installed on your machine:
 
@@ -43,6 +43,10 @@ If it doesn't detect Git as a valid command, you must reinstall Git and ensure y
 
 ![Windows add Git to path](images/dev-env-gitbash.png){:width="300px"}
 
+> **Note**
+>
+> After you have installed Git, you must quit and then start Docker Desktop. From the Docker menu, select **Quit Docker Desktop**, and then start it again.
+
 ## Start a single container Dev Environment
 
 The simplest way to get started with Dev Environments is to create a new environment by cloning the Git repository of the project you are working on. For example, let us create a new Dev Environment using a simple `single-dev-env` project from the [Docker Samples](https://github.com/dockersamples/single-dev-env){:target="_blank" rel="noopener" class="_"} GitHub repository.
@@ -51,6 +55,38 @@ The simplest way to get started with Dev Environments is to create a new environ
 >
 > When cloning a Git repository using SSH, ensure you've added your SSH key to the ssh-agent. To do this, open a terminal and run `ssh-add <path to your private ssh key>`.
 
+> **Note**
+>
+> If you have enabled the WSL 2 integration in Docker Desktop for Windows, make sure you have an SSH agent running in your WSL 2 distribution.
+
+<div class="panel panel-default">
+    <div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapse-wsl2-ssh" style="cursor: pointer">
+    How to start an SSH agent in WSL2
+    <i class="chevron fa fa-fw"></i></div>
+    <div class="collapse block" id="collapse-wsl2-ssh">
+    If your WSL 2 distribution doesn't have an `ssh-agent` running, you can append this script at the end of your profile file (that is: ~/.profile, ~/.zshrc, ...).
+<pre><code>
+SSH_ENV="$HOME/.ssh/agent-environment"
+function start_agent {
+    echo "Initialising new SSH agent..."
+    /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
+    echo succeeded
+    chmod 600 "${SSH_ENV}"
+    . "${SSH_ENV}" > /dev/null
+}
+# Source SSH settings, if applicable
+if [ -f "${SSH_ENV}" ]; then
+    . "${SSH_ENV}" > /dev/null
+    ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
+        start_agent;
+    }
+else
+    start_agent;
+fi
+</code></pre>
+    </div>
+</div>
+
 1. Click **Create New Environment**. This opens the **Create a Dev Environment** dialog. Copy `https://github.com/dockersamples/single-dev-env.git` and add it to the **Repository URL** field on the **Remote Git Repository** tab.
 2. Now, click **Create**.
 
@@ -58,7 +94,7 @@ The simplest way to get started with Dev Environments is to create a new environ
 
 ![Single container Dev environment](images/dev-env-container.png){:width="700px"}
 
-In the above example, the names `amazing_mclaren` and `stoic_carver` are randomly generated. You'll most likely see different names when you create your Dev Environment.
+In the above example, the names `wizardly_ellis` and `relaxed_maclaren` are randomly generated. You'll most likely see different names when you create your Dev Environment.
 
 Hover over the container and click **Open in VS Code** to start working in VS Code as usual. You can also open a terminal in VS Code, and use Git to push or pull code to your repository, or switch between branches and work as you would normally.
 
@@ -207,9 +243,19 @@ The `development`target uses a `golang:1.16-alpine` image with all dependencies 
 
 In our example, the Docker Compose files are the same. However, they could be different and the services defined in the main Compose file may use other targets to build or directly reference other images.
 
+## Specify a Dockerfile 
+
+In this preview, Dev Environments support a JSON file which allows you to specify a Dockerfile to define your Dev Environment. You must include this as part of the `.docker` folder and then add it as a `config.json` file. For example:
+
+```jsx
+{
+    "dockerfile": "Dockerfile.devenv"
+}
+```
+
 ## Specify a base image
 
-In this preview, Dev Environments support a simple YAML file which allows you to specify the base image that you would like to use as part of your Dev Environment. You must include this as part of the `.docker` folder and then add it as a `config.json` file. For example, to use the Jekyll base image, add:
+If you already have an image built, you can specify it as a base image to define your Dev Environment. You must include this as part of the `.docker` folder and then add it as a `config.json` file. For example, to use the Jekyll base image, add:
 
 ```jsx
 {

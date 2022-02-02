@@ -15,13 +15,44 @@ toc_max: 2
 
 For information about Docker Desktop system requirements, see [Docker Desktop for Mac system requirements](mac/install.md#system-requirements) and [Docker Desktop for Windows system requirements](windows/install.md#system-requirements).
 
+### Where does Docker Desktop get installed on my machine?
+
+By default, Docker Desktop is installed at the following location:
+
+- On Mac: `/Applications/Docker.app`
+- On Windows: `C:\Program Files\Docker\Docker`
+
 ### Do I need to pay to use Docker Desktop?
 
-Docker Desktop remains free for small businesses (fewer than 250 employees AND less than $10 million in revenue), personal use, education, and non-commercial open-source projects. It requires a paid subscription for professional use in larger enterprises.
+Docker Desktop remains free for small businesses (fewer than 250 employees AND less than $10 million in annual revenue), personal use, education, and non-commercial open-source projects. It requires a paid subscription for professional use in larger enterprises.
 The effective date of these terms is August 31, 2021. There is a grace period until January 31, 2022, for those that will require a paid subscription to use Docker Desktop. When downloading and installing Docker Desktop, you will be asked to agree to the [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement){: target="_blank" rel="noopener" class="_"}.
 
 Read the [Blog](https://www.docker.com/blog/updating-product-subscriptions/){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"} and [FAQs](https://www.docker.com/pricing/faq){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"} to learn how companies using Docker Desktop may be affected. For information about Docker Desktop licensing, see [Docker Desktop License Agreement](../subscription/index.md#docker-desktop-license-agreement).
 
+### Can I use Docker Desktop offline?
+
+Yes, you can use Docker Desktop offline. However, you
+will not be able to access features that require an active internet
+connection. Additionally, any functionality that requires you to sign in will
+also not work while using Docker Desktop offline or in air-gapped environments.
+This includes:
+
+- The in-app [Quick Start Guide](/mac/install.md#quick-start-guide)
+- Pull or push an image to Docker Hub
+- [Image Access Management](../docker-hub/image-access-management.md)
+- [Vulnerability scanning](../docker-hub/vulnerability-scanning.md)
+- View remote images in the [Docker Dashboard](dashboard.md)
+- Set up [Dev Environments](dev-environments.md)
+- Docker build when using [Buildkit](../develop/develop-images/build_enhancements.md). You can work around this by disabling
+  BuildKit. Run `DOCKER_BUILDKIT=0 docker build .` to disable BuildKit.
+- Deploying an app to the cloud through Compose
+  [ACI](../cloud/aci-integration.md) and [ECS](../cloud/ecs-integration.md)
+  integrations
+- [Kubernetes](kubernetes.md) (Images are download when you enable Kubernetes for the first time)
+- [Check for updates](/mac/install.md#updates) (manual and automatic)
+- [In-app diagnostics](/mac/troubleshoot.md#diagnose-and-feedback) (including the [Self-diagnose tool](/mac/troubleshoot.md#self-diagnose-tool))
+- Tip of the week
+- Sending usage statistics
 
 ### What is an experimental feature?
 
@@ -184,7 +215,7 @@ Docker.app connects to it, so it's safe to ignore.
 
 Yes, you can run VirtualBox along with Docker Desktop if you have enabled the [Windows Hypervisor Platform](https://docs.microsoft.com/en-us/virtualization/api/){: target="_blank" rel="noopener" class="_"} feature on your machine.
 
-### Why is Windows 10 required?
+### Why is Windows 10 or Windows 11 required?
 
 Docker Desktop uses the Windows Hyper-V features. While older Windows versions have Hyper-V, their Hyper-V implementations lack features critical for Docker Desktop to work.
 
@@ -232,3 +263,8 @@ For workarounds and to learn more, see
 Docker Desktop supports two types of symlinks: Windows native symlinks and symlinks created inside a container.
 
 The Windows native symlinks are visible within the containers as symlinks, whereas symlinks created inside a container are represented as [mfsymlinks](https://wiki.samba.org/index.php/UNIX_Extensions#Minshall.2BFrench_symlinks){:target="_blank" rel="noopener" class="_"}. These are regular Windows files with a special metadata. Therefore the symlinks created inside a container appear as symlinks inside the container, but not on the host.
+
+### File sharing with Kubernetes and WSL 2
+
+Docker Desktop mounts the Windows host filesystem under `/run/desktop` inside the container running Kubernetes.
+See the [Stack Overflow post](https://stackoverflow.com/questions/67746843/clear-persistent-volume-from-a-kubernetes-cluster-running-on-docker-desktop/69273405#69273){:target="_blank" rel="noopener" class="_"} for an example of how to configure a Kubernetes Persistent Volume to represent directories on the host.

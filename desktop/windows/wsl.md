@@ -9,6 +9,15 @@ toc_min: 2
 toc_max: 3
 ---
 
+> **Update to the Docker Desktop terms**
+>
+> Commercial use of Docker Desktop in larger enterprises (more than 250
+> employees OR more than $10 million USD in annual revenue) now requires a paid
+> subscription. The grace period for those that will require a paid subscription
+> ends on January 31, 2022. [Learn more](https://www.docker.com/blog/the-grace-period-for-the-docker-subscription-service-agreement-ends-soon-heres-what-you-need-to-know/){:
+ target="_blank" rel="noopener" class="_" id="dkr_docs_cta"}.
+{: .important}
+
 Windows Subsystem for Linux (WSL) 2 introduces a significant architectural change as it is a full Linux kernel built by Microsoft, allowing Linux containers to run natively without emulation. With Docker Desktop running on WSL 2, users can leverage Linux workspaces and avoid having to maintain both Linux and Windows build scripts. In addition, WSL 2 provides improvements to file system sharing, boot time, and allows access to some cool new features for Docker Desktop users.
 
 Docker Desktop uses the dynamic memory allocation feature in WSL 2 to greatly improve the resource consumption. This means, Docker Desktop only uses the required amount of CPU and memory resources it needs, while enabling CPU and memory-intensive tasks such as building a container to run much faster.
@@ -19,9 +28,9 @@ Additionally, with WSL 2, the time required to start a Docker daemon after a col
 
 Before you install the Docker Desktop WSL 2 backend, you must complete the following steps:
 
-1. Install Windows 10, version 1903 or higher.
-2. Enable WSL 2 feature on Windows. For detailed instructions, refer to the [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
-3. Download and install the [Linux kernel update package](https://docs.microsoft.com/windows/wsl/wsl2-kernel).
+1. Install Windows 10, version 1903 or higher or Windows 11.
+2. Enable WSL 2 feature on Windows. For detailed instructions, refer to the [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10){:target="_blank" rel="noopener" class="_"}.
+3. Download and install the [Linux kernel update package](https://docs.microsoft.com/windows/wsl/wsl2-kernel){:target="_blank" rel="noopener" class="_"}.
 
 ## Best practices
 
@@ -34,13 +43,13 @@ Before you install the Docker Desktop WSL 2 backend, you must complete the follo
       `docker run -v /mnt/c/users:/users` (where `/mnt/c` is mounted from Windows).
   - Instead, from a Linux shell use a command like `docker run -v ~/my-project:/sources <my-image>`
       where `~` is expanded by the Linux shell to `$HOME`.
-- If you have concerns about the size of the docker-desktop-data VHDX, or need to change it, take a look at the [WSL tooling built into Windows](https://docs.microsoft.com/en-us/windows/wsl/wsl2-ux-changes#understanding-wsl-2-uses-a-vhd-and-what-to-do-if-you-reach-its-max-size).
-- If you have concerns about CPU or memory usage, you can configure limits on the memory, CPU, Swap size allocated to the [WSL 2 utility VM](https://docs.microsoft.com/en-us/windows/wsl/wsl-config#configure-global-options-with-wslconfig).
+- If you have concerns about the size of the docker-desktop-data VHDX, or need to change it, take a look at the [WSL tooling built into Windows](https://docs.microsoft.com/en-us/windows/wsl/vhd-size){:target="_blank" rel="noopener" class="_"}.
+- If you have concerns about CPU or memory usage, you can configure limits on the memory, CPU, Swap size allocated to the [WSL 2 utility VM](https://docs.microsoft.com/en-us/windows/wsl/wsl-config#global-configuration-options-with-wslconfig){:target="_blank" rel="noopener" class="_"}.
 - To avoid any potential conflicts with using WSL 2 on Docker Desktop, you must [uninstall any previous versions of Docker Engine](../../engine/install/ubuntu.md#uninstall-docker-engine) and CLI installed directly through Linux distributions before installing Docker Desktop.
 
 ## Download
 
-Download [Docker Desktop Stable 2.3.0.2](https://hub.docker.com/editions/community/docker-ce-desktop-windows/) or a later release.
+Download [Docker Desktop 2.3.0.2](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe) or a later release.
 
 ## Install
 
@@ -145,4 +154,4 @@ GPU Device 0: "GeForce RTX 2060 with Max-Q Design" with compute capability 7.5
 
 ## Feedback
 
-Your feedback is very important to us. Please let us know your feedback by creating an issue in the [Docker Desktop for Windows GitHub](https://github.com/docker/for-win/issues) repository and adding the **WSL 2** label.
+Your feedback is very important to us. Please let us know your feedback by creating an issue in the [Docker Desktop for Windows GitHub](https://github.com/docker/for-win/issues){:target="_blank" rel="noopener" class="_"} repository and adding the **WSL 2** label.

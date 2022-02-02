@@ -16,6 +16,11 @@ title: Install Docker Engine on Ubuntu
 toc_max: 4
 ---
 
+> **Docker Desktop for Linux**
+>
+> Docker Desktop helps you build, share, and run containers easily on Mac and Windows as you do on Linux. Docker handles the complex setup and allows you to focus on writing the code. Thanks to the positive support we received on the [subscription updates](https://www.docker.com/blog/updating-product-subscriptions/){: target="_blank" rel="noopener" class="_" id="dkr_docs_cta"}, we've started working on [Docker Desktop for Linux](https://www.docker.com/blog/accelerating-new-features-in-docker-desktop/){: target="_blank" rel="noopener" class="_" id="dkr_docs_cta"} which is the second-most popular feature request in our public roadmap. If you are interested in early access, sign up for our [Developer Preview program](https://www.docker.com/community/get-involved/developer-preview){: target="_blank" rel="noopener" class="_" id="dkr_docs_cta"}.
+{: .important}
+
 To get started with Docker Engine on Ubuntu, make sure you
 [meet the prerequisites](#prerequisites), then
 [install Docker](#installation-methods).
@@ -27,8 +32,8 @@ To get started with Docker Engine on Ubuntu, make sure you
 To install Docker Engine, you need the 64-bit version of one of these Ubuntu
 versions:
 
+- Ubuntu Impish 21.10
 - Ubuntu Hirsute 21.04
-- Ubuntu Groovy 20.10
 - Ubuntu Focal 20.04 (LTS)
 - Ubuntu Bionic 18.04 (LTS)
 
@@ -101,7 +106,6 @@ from the repository.
     $ sudo apt-get update
 
     $ sudo apt-get install \
-        apt-transport-https \
         ca-certificates \
         curl \
         gnupg \
@@ -118,57 +122,11 @@ from the repository.
     **nightly** or **test** repository, add the word `nightly` or `test` (or both)
     after the word `stable` in the commands below. [Learn about **nightly** and **test** channels](index.md).
 
-    > **Note**: The `lsb_release -cs` sub-command below returns the name of your
-    > Ubuntu distribution, such as `xenial`. Sometimes, in a distribution
-    > like Linux Mint, you might need to change `$(lsb_release -cs)`
-    > to your parent Ubuntu distribution. For example, if you are using
-    >  `Linux Mint Tessa`, you could use `bionic`. Docker does not offer any guarantees on untested
-    > and unsupported Ubuntu distributions.
-
-    <ul class="nav nav-tabs">
-      <li class="active"><a data-toggle="tab" data-target="#x86_64_repo">x86_64 / amd64</a></li>
-      <li><a data-toggle="tab" data-target="#armhf_repo">armhf</a></li>
-      <li><a data-toggle="tab" data-target="#arm64_repo">arm64</a></li>
-      <li><a data-toggle="tab" data-target="#s390x_repo">s390x</a></li>
-    </ul>
-    <div class="tab-content">
-    <div id="x86_64_repo" class="tab-pane fade in active" markdown="1">
-
     ```console
     $ echo \
-      "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] {{ download-url-base }} \
+      "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] {{ download-url-base }} \
       $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
     ```
-
-    </div>
-    <div id="armhf_repo" class="tab-pane fade" markdown="1">
-
-    ```console
-    $ echo \
-      "deb [arch=armhf signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] {{ download-url-base }} \
-      $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-    ```
-
-    </div>
-    <div id="arm64_repo" class="tab-pane fade" markdown="1">
-
-    ```console
-    $ echo \
-      "deb [arch=arm64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] {{ download-url-base }} \
-      $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-    ```
-
-    </div>
-    <div id="s390x_repo" class="tab-pane fade" markdown="1">
-
-    ```console
-    $ echo \
-      "deb [arch=s390x signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] {{ download-url-base }} \
-      $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-    ```
-
-    </div>
-    </div> <!-- tab-content -->
 
 #### Install Docker Engine
 

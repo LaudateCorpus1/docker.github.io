@@ -72,7 +72,7 @@ If you need to specify volume driver options, you must use `--mount`.
     is mounted in the container. May be specified as `destination`, `dst`,
     or `target`.
   - The `readonly` option, if present, causes the bind mount to be [mounted into
-    the container as read-only](#use-a-read-only-volume).
+    the container as read-only](#use-a-read-only-volume). May be specified as `readonly` or `ro`.
   - The `volume-opt` option, which can be specified more than once, takes a
     key-value pair consisting of the option name and its value.
 
@@ -494,7 +494,7 @@ $ docker service create -d \
 
 #### NFSv4
 ```console
-docker service create -d \
+$ docker service create -d \
     --name nfs-service \
     --mount 'type=volume,source=nfsvolume,target=/app,volume-driver=local,volume-opt=type=nfs,volume-opt=device=:/var/docker-nfs,"volume-opt=o=addr=10.0.0.10,rw,nfsvers=4,async"' \
     nginx:latest
@@ -519,7 +519,7 @@ Notice the `addr` option is required if using a hostname instead of an IP so doc
 Volumes are useful for backups, restores, and migrations. Use the
 `--volumes-from` flag to create a new container that mounts that volume.
 
-### Backup a container
+### Back up a volume
 
 For example, create a new container named `dbstore`:
 
@@ -540,7 +540,7 @@ $ docker run --rm --volumes-from dbstore -v $(pwd):/backup ubuntu tar cvf /backu
 When the command completes and the container stops, we are left with a backup of
 our `dbdata` volume.
 
-### Restore container from backup
+### Restore volume from backup
 
 With the backup just created, you can restore it to the same container, or
 another that you made elsewhere.
@@ -578,6 +578,12 @@ the Docker Engine removes the `/foo` volume but not the `awesome` volume.
 $ docker run --rm -v /foo -v awesome:/bar busybox top
 ```
 
+> **Note**:
+>
+> If another container binds the volumes with
+> `--volumes-from`, the volume definitions are _copied_ and the 
+> anonymous volume also stays after the first container is removed.
+  
 ### Remove all volumes
 
 To remove all unused volumes and free up space:

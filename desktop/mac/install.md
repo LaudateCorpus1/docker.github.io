@@ -6,12 +6,22 @@ redirect_from:
 - /docker-for-mac/install/
 ---
 
+> **Update to the Docker Desktop terms**
+>
+> Commercial use of Docker Desktop in larger enterprises (more than 250
+> employees OR more than $10 million USD in annual revenue) now requires a paid
+> subscription. The grace period for those that will require a paid subscription
+> ends on January 31, 2022. [Learn
+> more](https://www.docker.com/blog/the-grace-period-for-the-docker-subscription-service-agreement-ends-soon-heres-what-you-need-to-know/){:
+ target="_blank" rel="noopener" class="_" id="dkr_docs_cta"}.
+{: .important}
+
 Welcome to Docker Desktop for Mac. This page contains information about Docker Desktop for Mac system requirements, download URLs, instructions to install and update Docker Desktop for Mac.
 
 > Download Docker Desktop for Mac
 >
-> [Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn }
-> [Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn }
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn }
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn }
 
 ## System requirements
 
@@ -26,13 +36,13 @@ Your Mac must meet the following requirements to install Docker Desktop successf
 
 ### Mac with Intel chip
 
-- **macOS must be version 10.14 or newer**. That is, Mojave, Catalina, or Big Sur. We recommend upgrading to the latest version of macOS.
+- **macOS must be version 10.15 or newer**. That is, Catalina, Big Sur, or Monterey. We recommend upgrading to the latest version of macOS.
 
   If you experience any issues after upgrading your macOS to version 10.15, you must install the latest version of Docker Desktop to be compatible with this version of macOS.
 
   > **Note**
   >
-  > Docker supports Docker Desktop on the most recent versions of macOS. That is, the current release of macOS and the previous two releases. As new major versions of macOS are made generally available, Docker stops supporting the oldest version and supports the newest version of macOS (in addition to the previous two releases). Docker Desktop currently supports macOS Mojave, macOS Catalina, and macOS Big Sur.
+  > Docker supports Docker Desktop on the most recent versions of macOS. That is, the current release of macOS and the previous two releases. As new major versions of macOS are made generally available, Docker stops supporting the oldest version and supports the newest version of macOS (in addition to the previous two releases). Docker Desktop currently supports macOS Catalina, macOS Big Sur, and macOS Monterey.
 
 - At least 4 GB of RAM.
 
@@ -43,7 +53,7 @@ Your Mac must meet the following requirements to install Docker Desktop successf
 
 ### Mac with Apple silicon
 
-- You must install **Rosetta 2** as some binaries are still Darwin/AMD64. To install Rosetta 2 manually from the command line, run the following command:
+- Beginning with Docker Desktop 4.3.0, we have removed the hard requirement to install **Rosetta 2**. There are a few optional command line tools that still require Rosetta 2 when using Darwin/AMD64. See the [Known issues section](apple-silicon.md#known-issues). However, to get the best experience, we recommend that you install Rosetta 2. To install Rosetta 2 manually from the command line, run the following command:
 
   ```console
   $ softwareupdate --install-rosetta
@@ -53,12 +63,6 @@ Your Mac must meet the following requirements to install Docker Desktop successf
 
 </div>
 </div>
-
-## What's included in the installer
-
-The Docker Desktop installation includes
-  [Docker Engine](../../engine/index.md), Docker CLI client,
-  [Docker Compose](../../compose/index.md), [Docker Content Trust](../../engine/security/trust/index.md), [Kubernetes](https://github.com/kubernetes/kubernetes/), and [Credential Helper](https://github.com/docker/docker-credential-helpers/).
 
 ## Install and run Docker Desktop on Mac
 
@@ -82,11 +86,11 @@ The Docker Desktop installation includes
     > If you do not agree to the terms, the Docker Desktop application will close and  you can no longer run Docker Desktop on your machine. You can choose to accept the terms at a later date by opening Docker Desktop.
     {: .important}
 
-    For more information, see [Docker Desktop License Agreement](/subscription/#docker-desktop-license-agreement).
+    For more information, see [Docker Desktop License Agreement](../../subscription/index.md#docker-desktop-license-agreement). We recommend that you also read the [Blog](https://www.docker.com/blog/updating-product-subscriptions/){: target="_blank" rel="noopener" class="_" id="dkr_docs_desktop_install_btl"} and [FAQs](https://www.docker.com/pricing/faq){: target="_blank" rel="noopener" class="_" id="dkr_docs_desktop_install_btl"} to learn how companies using Docker Desktop may be affected.
 
 ### Quick start guide  
   
-  If you've just installed the app, Docker Desktop launches the Quick Start Guide. The tutorial includes a simple exercise to build an example Docker image, run it is a container, push and save the image to Docker Hub.
+  If you've just installed the app, Docker Desktop launches the Quick Start Guide. The tutorial includes a simple exercise to build an example Docker image, run it as a container, push and save the image to Docker Hub.
 
    ![Docker Quick Start tutorial](images/docker-tutorial-mac.png)
 
@@ -118,7 +122,7 @@ To uninstall Docker Desktop from your Mac:
 - [Troubleshooting](troubleshoot.md) describes common problems, workarounds, how
   to run and submit diagnostics, and submit issues.
 - [FAQs](../faqs.md) provide answers to frequently asked questions.
-- [Release notes](release-notes.md) lists component updates, new features, and improvements associated with Docker Desktop releases.
+- [Release notes](release-notes/index.md) lists component updates, new features, and improvements associated with Docker Desktop releases.
 - [Get started with Docker](../../get-started/index.md) provides a general Docker tutorial.
 * [Back up and restore data](../backup-and-restore.md) provides instructions
   on backing up and restoring data related to Docker.
