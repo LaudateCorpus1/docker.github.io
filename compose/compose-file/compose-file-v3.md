@@ -659,10 +659,10 @@ services:
 
 > Added in [version 3](compose-versioning.md#version-3) file format.
 
-Specify configuration related to the deployment and running of services. This
-only takes effect when deploying to a [swarm](../../engine/swarm/index.md) with
+Specify configuration related to the deployment and running of services. The following  
+sub-options only takes effect when deploying to a [swarm](../../engine/swarm/index.md) with
 [docker stack deploy](../../engine/reference/commandline/stack_deploy.md), and is
-ignored by `docker-compose up` and `docker-compose run`.
+ignored by `docker-compose up` and `docker-compose run`, except for `resources`.
 
 ```yaml
 version: "{{ site.compose_file_v3 }}"
@@ -1105,6 +1105,16 @@ also ignored.
 ```console
 # Set Rails/Rack environment
 RACK_ENV=development
+```
+
+Compose also recognizes inline comments, like in:
+```
+MY_VAR = value # this is a comment
+```
+
+To avoid interpreting "#" as an inline comment, use the quotation marks:
+```
+MY_VAR = "All the # inside are taken as part of the value"
 ```
 
 > **Note**
@@ -1592,8 +1602,18 @@ The corresponding network configuration in the
 [top-level networks section](#network-configuration-reference) must have an
 `ipam` block with subnet configurations covering each static address.
 
-> If IPv6 addressing is desired, the [`enable_ipv6`](compose-file-v2.md#enable_ipv6)
-> option must be set, and you must use a [version 2.x Compose file](compose-file-v2.md#ipv4_address-ipv6_address).
+If you'd like to use IPv6, you must first ensure that the Docker daemon is configured to support IPv6.  See [Enable IPv6](../../config/daemon/ipv6.md) for detailed instructions. You can then access IPv6 addressing in a version 3.x Compose file by editing the `/etc/docker/daemon.json` to contain:
+`{"ipv6": true, "fixed-cidr-v6": "2001:db8:1::/64"}`
+
+Then, reload the docker daemon and edit docker-compose.yml to contain the following under the service:
+
+```yaml
+    sysctls:
+      - net.ipv6.conf.all.disable_ipv6=0
+```
+
+> The [`enable_ipv6`](compose-file-v2.md#enable_ipv6)
+> option is only available in a [version 2.x Compose file](compose-file-v2.md#ipv4_address-ipv6_address).
 > _IPv6 options do not currently work in swarm mode_.
 
 An example:
@@ -1788,8 +1808,8 @@ the service's task containers.
   specified.
 - `mode`: The permissions for the file to be mounted in `/run/secrets/`
   in the service's task containers, in octal notation. For instance, `0444`
-  represents world-readable. The default in Docker 1.13.1 is `0000`, but is
-  be `0444` in newer versions. Secrets cannot be writable because they are mounted
+  represents world-readable. The default in Docker 1.13.1 is `0000`, but it is
+  `0444` in newer versions. Secrets cannot be writable because they are mounted
   in a temporary filesystem, so if you set the writable bit, it is ignored. The
   executable bit can be set. If you aren't familiar with UNIX file permission
   modes, you may find this
@@ -2740,7 +2760,7 @@ stack.
 ## Compose documentation
 
 - [User guide](../index.md)
-- [Installing Compose](../install.md)
+- [Installing Compose](../install/index.md)
 - [Compose file versions and upgrading](compose-versioning.md)
 - [Sample apps with Compose](../samples-for-compose.md)
 - [Command line reference](../reference/index.md)

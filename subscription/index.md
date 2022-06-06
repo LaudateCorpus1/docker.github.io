@@ -17,9 +17,6 @@ On August 31, 2021, we [announced](https://www.docker.com/blog/updating-product-
 - Our [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"} includes a change to the terms for **Docker Desktop**.
     - Docker Desktop **remains free** for small businesses (fewer than 250 employees AND less than $10 million in annual revenue), personal use, education, and non-commercial open-source projects.
     - It requires a paid subscription (**Pro, Team, or Business**), for as little as $5 a month, for commercial use in larger enterprises.
-    - The grace period for those that will require a paid subscription ends on
-      January 31, 2022. [Learn more](https://www.docker.com/blog/the-grace-period-for-the-docker-subscription-service-agreement-ends-soon-heres-what-you-need-to-know/){:
- target="_blank" rel="noopener" class="_" id="dkr_docs_cta"}.
 - The Docker Pro and Docker Team subscriptions now **include commercial use** of Docker Desktop.
 - The existing Docker Free subscription has been renamed **Docker Personal**.
 - **No changes** to Docker Engine or any other upstream **open-source** Docker or Moby project.
@@ -32,7 +29,7 @@ The following sections provide an overview of each tier. To compare features ava
 
 Docker Personal is the new name for the Docker Free subscription. With its focus on the open-source communities, individual developers, education, and small businesses, Docker Personal will continue to allow free use of Docker components - including the Docker CLI, Docker Compose, Docker Engine, Docker Desktop, Docker Hub, Kubernetes, Docker Build and Docker BuildKit, Docker Official Images, Docker Scan, and more.
 
-Docker Personal includes unlimited public repositories and unlimited collaborators for public repositories at no cost per month.
+Docker Personal includes unlimited public repositories, unlimmited [Scoped Access Tokens](../docker-hub/access-tokens.md), and unlimited collaborators for public repositories at no cost per month.
 
 For a list of features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"}.
 
@@ -40,7 +37,7 @@ For a list of features available in each tier, see [Docker Pricing](https://www.
 
 **Docker Pro** enables individual developers to get more control of their development environment and provides an integrated and reliable developer experience. It reduces the amount of time developers spend on mundane and repetitive tasks and empowers developers to spend more time creating value for their customers.
 
-Docker Pro includes all the features available in Personal, additionally, it includes unlimited private repositories, unlimited public repositories, unlimited [collaborators](../docker-hub/repos.md#collaborators-and-their-role) for public repositories, [Auto Builds](../docker-hub/builds/index.md) with 5 concurrent builds, 300 [Hub Vulnerability Scans](../docker-hub/vulnerability-scanning.md), 5 [Scoped Access Tokens](../docker-hub/access-tokens.md), and more.
+Docker Pro includes all the features available in Personal, additionally, it includes unlimited private repositories, unlimited public repositories, unlimited [collaborators](../docker-hub/repos.md#collaborators-and-their-role) for public repositories, [Auto Builds](../docker-hub/builds/index.md) with 5 concurrent builds, 300 [Hub Vulnerability Scans](../docker-hub/vulnerability-scanning.md), unlimited [Scoped Access Tokens](../docker-hub/access-tokens.md), and more.
 
 For a list of features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"}.
 
@@ -48,7 +45,7 @@ For a list of features available in each tier, see [Docker Pricing](https://www.
 
 **Docker Team** offers capabilities for collaboration, productivity, and security across organizations. It enables groups of developers to unlock the full power of collaboration and sharing combined with essential security features and team management capabilities.
 
-Docker Team includes everything included in Docker Pro, plus unlimited private repositories, [Auto Builds](../docker-hub/builds/index.md) with 15 concurrent builds, unlimited [Scoped Access Tokens](../docker-hub/access-tokens.md), advanced collaboration and management tools, including organization and team management with Role Based Access Control (RBAC) for the whole team, [Audit Logs](../docker-hub/audit-log.md), and more.
+Docker Team includes everything included in Docker Pro, plus unlimited private repositories, [Auto Builds](../docker-hub/builds/index.md) with 15 concurrent builds, unlimited [Scoped Access Tokens](../docker-hub/access-tokens.md), advanced collaboration and management tools, including organization and team management with Role Based Access Control (RBAC) for the whole team, an [audit log](../docker-hub/audit-log.md), and more.
 
 For a list of features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"}.
 
@@ -68,8 +65,6 @@ Our [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-
 
 - It **remains free** for small businesses (fewer than 250 employees AND less than $10 million in annual revenue), personal use, education, and non-commercial open source projects.
 - It requires a paid subscription for professional use in larger enterprises.
-- The grace period for those that will require a paid subscription ends on January 31, 2022. [Learn more](https://www.docker.com/blog/the-grace-period-for-the-docker-subscription-service-agreement-ends-soon-heres-what-you-need-to-know/){:
- target="_blank" rel="noopener" class="_" id="dkr_docs_cta"}
 - The existing Docker Free subscription has been renamed **Docker Personal** and we have introduced a Docker Business subscription .
 - The Docker Pro, Team, and Business subscriptions include commercial use of Docker Desktop.
 

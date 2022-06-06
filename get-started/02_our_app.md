@@ -24,7 +24,7 @@ Before we can run the application, we need to get the application source code on
 our machine. For real projects, you will typically clone the repo. But, for this tutorial,
 we have created a ZIP file containing the application.
 
-1. [Download the App contents](https://github.com/docker/getting-started/tree/master/app){:target="_blank" rel="noopener" class="_"}. You can either pull the entire project or download it as a zip and extract the app folder out to get started with
+1. [Download the App contents](https://github.com/docker/getting-started/tree/master/app){:target="_blank" rel="noopener" class="_"}. You can either pull the entire project or download it as a zip and extract the app folder out to get started with.
 
 2. Once extracted, use your favorite code editor to open the project. If you're in need of
     an editor, you can use [Visual Studio Code](https://code.visualstudio.com/){:target="_blank" rel="noopener" class="_"}. You should
@@ -50,6 +50,7 @@ see a few flaws in the Dockerfile below. But, don't worry. We'll go over them.
    COPY . .
    RUN yarn install --production
    CMD ["node", "src/index.js"]
+   EXPOSE 3000
    ```
 
    Please check that the file `Dockerfile` has no file extension like `.txt`. Some editors may append this file extension automatically and this would result in an error in the next step.
@@ -73,7 +74,7 @@ see a few flaws in the Dockerfile below. But, don't worry. We'll go over them.
    for the final image. Since we named the image `getting-started`, we can refer to that
    image when we run a container.
 
-   The `.` at the end of the `docker build` command tells that Docker should look for the `Dockerfile` in the current directory.
+   The `.` at the end of the `docker build` command tells Docker that it should look for the `Dockerfile` in the current directory.
 
 ## Start an app container
 

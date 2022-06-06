@@ -23,8 +23,8 @@ This page contains information about the new features, improvements, known issue
 
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1){: target="_blank" rel="noopener" class="_"} to see what's coming next.
 
-## Docker Desktop 4.4.4
-2022-01-24
+## Docker Desktop 4.8.1
+2022-05-09
 
 > Download Docker Desktop
 >
@@ -32,9 +32,211 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 > Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){:
 > .button .primary-btn }
 
+### New
+
+- Released [Docker Desktop for Linux](https://docs.docker.com/desktop/linux/).
+- Beta release of [Docker Extensions](https://docs.docker.com/desktop/extensions) and Extensions SDK.
+- Created a Docker Homepage where you can run popular images and discover how to use them.
+- [Compose V2 is now GA](https://www.docker.com/blog/announcing-compose-v2-general-availability/)
+
+### Bug fixes and minor changes
+
+- Fixed a bug that caused the Kubernetes cluster to be deleted when updating Docker Desktop.
+
+
+## Docker Desktop 4.8.0
+2022-05-06
+
+> Download Docker Desktop
+>
+> [For Windows](https://desktop.docker.com/win/main/amd64/78933/Docker%20Desktop%20Installer.exe)
+
+### New
+
+- Released [Docker Desktop for Linux](https://docs.docker.com/desktop/linux/).
+- Beta release of [Docker Extensions](https://docs.docker.com/desktop/extensions) and Extensions SDK.
+- Created a Docker Homepage where you can run popular images and discover how to use them.
+- [Compose V2 is now GA](https://www.docker.com/blog/announcing-compose-v2-general-availability/)
+
+### Upgrades
+
+- [Compose v2.5.0](https://github.com/docker/compose/releases/tag/v2.5.0)
+- [Go 1.18.1](https://golang.org/doc/go1.18)
+- [Kubernetes 1.24](https://github.com/kubernetes/kubernetes/releases/tag/v1.24.0)
+
+### Bug fixes and minor changes
+
+- Introduced reading system proxy. You no longer need to manually configure proxies unless it differs from your OS level proxy.
+- Fixed a bug that showed Remote Repositories in the Dashboard when running behind a proxy.
+- Fixed vpnkit establishing and blocking the client connection even if the server is gone. See [docker/for-mac#6235](https://github.com/docker/for-mac/issues/6235)
+- Made improvements on the Volume tab in Docker Desktop:
+  - Volume size is displayed.
+  - Columns can be resized, hidden and reordered.
+  - A columns sort order and hidden state is persisted, even after Docker Desktop restarts.
+  - Row selection is persisted when switching between tabs, even after Docker Desktop restarts.
+- Fixed a bug in the Dev Environments tab that did not add a scroll when more items were added to the screen.
+- Standardised the header title and action in the Dashboard.
+- Added support for downloading Registry Access Management policies through HTTP proxies.
+- Fixed an issue related to empty remote repositories when the machine is in sleep mode for an extended period of time.
+- Fixed a bug where dangling images were not selected in the cleanup process if their name was not marked as "<none>" but their tag is.
+- Improved the error message when `docker pull` fails because an HTTP proxy is required.
+- Added the ability to clear the search bar easily in Docker Desktop.
+- Renamed the "Containers / Apps" tab to "Containers".
+- Fixed a silent crash in the Docker Desktop installer when `C:\ProgramData\DockerDesktop` is a file or a symlink.
+- Improved support for the `Ctrl+W` shortcut.
+- Fixed a bug where an image with no namespace, for example `docker pull <private registry>/image`, would be erroneously blocked by Registry Access Management unless access to Docker Hub was enabled in settings.
+
+### Known issues
+
+- Currently, if you are running a Kubernetes cluster, it will be deleted when you upgrade to Docker Desktop 4.8.0. We aim to fix this in the next release.
+
+## Docker Desktop 4.7.1
+2022-04-19
+
+> Download Docker Desktop
+>
+> [For Windows](https://desktop.docker.com/win/main/amd64/77678/Docker%20Desktop%20Installer.exe)
+
+### Bug fixes and minor changes
+ - Fixed a bug where update was failing with a symlink error. Fixes [docker/for-win#12650](https://github.com/docker/for-win/issues/12650).
+ - Fixed a bug that prevented using Windows container mode. Fixes [docker/for-win#12652](https://github.com/docker/for-win/issues/12652).
+ - Fixed a crash on the Quick Start Guide final screen.
+
+## Docker Desktop 4.7.0
+2022-04-07
+
+> Download Docker Desktop
+>
+> [For Windows](https://desktop.docker.com/win/main/amd64/77141/Docker%20Desktop%20Installer.exe)
+
 ### Security
 
-- Fixed [CVE-2022-23774](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23774) where arbitrary files could be moved on the system.
+- Update Docker Engine to v20.10.14 to address [CVE-2022-24769](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-24769){: target="_blank" rel="noopener" class="_"}
+- Update containerd to v1.5.11 to address [CVE-2022-24769](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-24769)
+
+### New
+
+- IT Administrators can now install Docker Desktop remotely using the command line. For more information, see [Install Docker Desktop using the command line](../install.md#install-from-the-command-line).
+- Add  the Docker Software Bill of Materials (SBOM) CLI plugin. The new CLI plugin enables users to generate SBOMs for Docker images. For more information, see [Docker SBOM](../../../engine/sbom/index.md).
+- Use [cri-dockerd](https://github.com/Mirantis/cri-dockerd){: target="_blank" rel="noopener" class="_"}  for new Kubernetes clusters instead of `dockershim`. The change is transparent from the user's point of view and Kubernetes containers run on the Docker Engine as before. `cri-dockerd` allows Kubernetes to manage Docker containers using the standard [Container Runtime Interface](https://github.com/kubernetes/cri-api#readme){: target="_blank" rel="noopener" class="_"}, the same interface used to control other container runtimes. For more information, see [The Future of Dockershim is cri-dockerd](https://www.mirantis.com/blog/the-future-of-dockershim-is-cri-dockerd/){: target="_blank" rel="noopener" class="_"}.
+
+### Upgrades
+
+- [Docker Engine v20.10.14](https://docs.docker.com/engine/release-notes/#201014)
+- [Compose v2.4.1](https://github.com/docker/compose/releases/tag/v2.4.1)
+- [Buildx 0.8.2](https://github.com/docker/buildx/releases/tag/v0.8.2)
+- [containerd v1.5.11](https://github.com/containerd/containerd/releases/tag/v1.5.11)
+- [Go 1.18](https://golang.org/doc/go1.18)
+
+### Bug fixes and minor changes
+ - Fixed a bug where the Registry Access Management policy was never refreshed after a failure.
+ - Fixed volume title. Fixes [docker/for-win#12616](https://github.com/docker/for-win/issues/12616).
+ - Fixed a bug in the WSL 2 integration that caused Docker commands to stop working after restarting Docker Desktop or after switching to Windows containers.
+ - Logs and terminals in the UI now respect your OS theme in light and dark mode.
+ - Easily clean up many volumes at once via multi-select checkboxes.
+ - Improved login feedback.
+
+## Docker Desktop 4.6.1
+2022-03-22
+
+> Download Docker Desktop
+>
+> [For Windows](https://desktop.docker.com/win/main/amd64/76265/Docker%20Desktop%20Installer.exe)
+
+### Upgrades
+
+- [Buildx 0.8.1](https://github.com/docker/buildx/releases/tag/v0.8.1)
+
+### Bug fixes and minor changes
+
+- Fixed diagnostics upload when there is no HTTP proxy set. Fixes [docker/for-mac#6234](https://github.com/docker/for-mac/issues/6234).
+- Removed a false positive "vm is not running" error from self-diagnose. Fixes [docker/for-mac#6233](https://github.com/docker/for-mac/issues/6233).
+- Prevented spinning in vpnkit-forwarder filling the logs with error messages.
+
+## Docker Desktop 4.6.0
+2022-03-14
+
+> Download Docker Desktop
+>
+> [For Windows](https://desktop.docker.com/win/main/amd64/75818/Docker%20Desktop%20Installer.exe)
+
+### Security
+
+- Fixed [CVE-2022-0847](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-0847){: target="_blank" rel="noopener" class="_"}, aka “Dirty Pipe”, an issue that could enable attackers to modify files in container images on the host, from inside a container.
+  If using the WSL 2 backend, you must update WSL 2 by running `wsl --update`.
+- Fixed [CVE-2022-26659](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-26659){: target="_blank" rel="noopener" class="_"}, which could allow an attacker to overwrite any administrator writable file on the system during the installation or the update of Docker Desktop.
+
+### New
+
+- The Docker Dashboard Volume Management feature now offers the ability to efficiently clean up volumes using multi-select checkboxes.
+
+### Upgrades
+
+- [Docker Engine v20.10.13](https://docs.docker.com/engine/release-notes/#201013)
+- [Compose v2.3.3](https://github.com/docker/compose/releases/tag/v2.3.3)
+- [Buildx 0.8.0](https://github.com/docker/buildx/releases/tag/v0.8.0)
+- [containerd v1.4.13](https://github.com/containerd/containerd/releases/tag/v1.4.13)
+- [runc v1.0.3](https://github.com/opencontainers/runc/releases/tag/v1.0.3)
+- [Go 1.17.8](https://golang.org/doc/go1.17)
+- [Linux kernel 5.10.104](https://hub.docker.com/layers/docker/for-desktop-kernel/5.10.104-379cadd2e08e8b25f932380e9fdaab97755357b3/images/sha256-7753b60f4544e5c5eed629d12151a49c8a4b48d98b4fb30e4e65cecc20da484d?context=explore)
+
+### Bug fixes and minor changes
+
+- Fixed uploading diagnostics when an HTTPS proxy is set.
+- Fixed the UI stuck in `starting` state forever although Docker Desktop is working fine from the command line.
+- Fixed missing Docker Desktop systray icon [docker/for-win#12573](https://github.com/docker/for-win/issues/12573)
+- Made checking for updates from the systray menu open the Software updates settings section.
+- Fixed Registry Access Management under WSL 2 with latest 5.10.60.1 kernel.
+- Fixed a UI crash when selecting the containers of a Compose application started from a WSL 2 environment. Fixes [docker/for-win#12567](https://github.com/docker/for-win/issues/12567).
+- Fixed copying text from terminal in Quick Start Guide. Fixes [docker/for-win#12444](https://github.com/docker/for-win/issues/12444).
+
+## Docker Desktop 4.5.1
+2022-02-15
+
+> Download Docker Desktop
+>
+> [For Windows](https://desktop.docker.com/win/main/amd64/74721/Docker%20Desktop%20Installer.exe)
+
+### Bug fixes and minor changes
+
+- Fixed an issue that caused new installations to default to the Hyper-V backend instead of WSL 2.
+- Fixed a crash in the Docker Dashboard which would make the systray menu disappear.
+
+If you are running Docker Desktop on Windows Home, installing 4.5.1 will switch it back to WSL 2 automatically. If you are running another version of Windows, and you want Docker Desktop to use the WSL 2 backend, you must manually switch by enabling the **Use the WSL 2 based engine** option in the **Settings > General** section.
+Alternatively, you can edit the Docker Desktop settings file located at `%APPDATA%\Docker\settings.json` and manually switch the value of the `wslEngineEnabled` field to `true`.
+
+## Docker Desktop 4.5.0
+2022-02-10
+
+### Security
+
+- Fixed [CVE-2022-23774](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23774){: target="_blank" rel="noopener" class="_"} where Docker Desktop allows attackers to move arbitrary files.
+
+### New
+
+- Docker Desktop 4.5.0 introduces a new version of the Docker menu which creates a consistent user experience across all operating systems. For more information, see the blog post [New Docker Menu & Improved Release Highlights with Docker Desktop 4.5](https://www.docker.com/blog/new-docker-menu-improved-release-highlights-with-docker-desktop-4-5/){: target="_blank" rel="noopener" class="_"}
+- The 'docker version' output now displays the version of Docker Desktop installed on the machine.
+
+### Upgrades
+
+- [Amazon ECR Credential Helper v0.6.0](https://github.com/awslabs/amazon-ecr-credential-helper/releases/tag/v0.6.0){: target="blank" rel="noopener" class=""}
+
+### Bug fixes and minor changes
+
+- Increased the filesystem watch (inotify) limits by setting `fs.inotify.max_user_watches=1048576` and `fs.inotify.max_user_instances=8192` in Linux. Fixes [docker/for-mac#6071](https://github.com/docker/for-mac/issues/6071).
+- Fixed an issue related to compose app started with version 2, but the dashboard only deals with version 1
+- Fixed an issue where Docker Desktop incorrectly prompted users to sign in after they quit Docker Desktop and start the application.
+
+### Known issues
+
+Installing Docker Desktop 4.5.0 from scratch has a bug which defaults Docker Desktop to use the Hyper-V backend instead of WSL 2. This means, Windows Home users will not be able to start Docker Desktop as WSL 2 is the only supported backend. To work around this issue, you must uninstall 4.5.0 from your machine and then download and install Docker Desktop 4.5.1 or a higher version. Alternatively, you can edit the Docker Desktop settings.json file located at `%APPDATA%\Docker\settings.json` and manually switch the value of the `wslEngineEnabled` field to `true`.
+
+## Docker Desktop 4.4.4
+2022-01-24
+
+> Download Docker Desktop
+>
+> [For Windows](https://desktop.docker.com/win/main/amd64/73704/Docker%20Desktop%20Installer.exe)
 
 ### Bug fixes and minor changes
 
@@ -88,6 +290,7 @@ This only affects users if they are on Docker Desktop 4.3.0, 4.3.1 and the user 
 - [Docker Engine v20.10.12](https://docs.docker.com/engine/release-notes/#201012)
 - [Compose v2.2.3](https://github.com/docker/compose/releases/tag/v2.2.3)
 - [Kubernetes 1.22.5](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.5)
+- [docker scan v0.16.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.16.0){: target="_blank" rel="noopener" class="_"}
 
 ### Bug fixes and minor changes
 
@@ -257,7 +460,7 @@ actual memory usage. See
 ### New
 
 - **Software Updates**: The Settings tab now includes a new section to help you manage Docker Desktop updates. The **Software Updates** section notifies you whenever there's a new update and allows you to download the update or view information on what's included in the newer version. For more information, see [Software Updates](../index.md#software-updates).
-- **Compose V2** You can now specify whether to use [Docker Compose V2](../../../compose/cli-command.md) in the General settings.
+- **Compose V2** You can now specify whether to use [Docker Compose V2](../../../compose/index.md#compose-v2-and-the-new-docker-compose-command) in the General settings.
 - **Volume Management**: Volume management is now available for users on any subscription, including Docker Personal. For more information, see [Explore volumes](../../dashboard.md#explore-volumes). Ships [Docker Public Roadmap#215](https://github.com/docker/roadmap/issues/215){: target="_blank" rel="noopener" class="_"}
 
 ### Upgrades

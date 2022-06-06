@@ -47,7 +47,7 @@ guides:
       path: /get-started/09_image_best/
     - title: "Part 10: What next?"
       path: /get-started/11_what_next/
-- sectiontitle: Language-specific guides (New)
+- sectiontitle: Language-specific guides
   section:
   - path: /language/
     title: Overview
@@ -914,8 +914,6 @@ reference:
       title: Overview of docker-compose CLI
     - path: /compose/reference/envvars/
       title: CLI environment variables
-    - path: /compose/completion/
-      title: Command-line completion
     - path: /compose/reference/build/
       title: docker-compose build
     - path: /compose/reference/config/
@@ -1034,20 +1032,76 @@ reference:
     path: /docker-hub/api/latest/
   - title: Registry API
     path: /registry/spec/api/
+  - sectiontitle: Docker Extension SDK API (Beta)
+    section:
+      - path:
+        title:
+      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/DesktopUI/
+        title: DesktopUI
+      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/Dialog/
+        title: Dialog
+      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/Docker/
+        title: Docker
+      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/DockerCommand/
+        title: DockerCommand
+      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/DockerDesktopClient/
+        title: DockerDesktopClient
+      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/Exec/
+        title: Exec
+      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/ExecProcess/
+        title: ExecProcess
+      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/ExecResult/
+        title: ExecResult
+      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/ExecStreamOptions/
+        title: ExecStreamOptions
+      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/Extension/
+        title: Extension
+      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/ExtensionCli/
+        title: ExtensionCli
+      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/ExtensionHost/
+        title: ExtensionHost
+      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/ExtensionVM/
+        title: ExtensionVM
+      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/Host/
+        title: Host
+      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/HttpService/
+        title: HttpService
+      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/NavigationIntents/
+        title: NavigationIntents
+      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/OpenDialogResult/
+        title: OpenDialogResult
+      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/RawExecResult/
+        title: RawExecResult
+      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/RequestConfig/
+        title: RequestConfig
+      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/RequestConfigV0/
+        title: RequestConfigV0
+      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/Toast/
+        title: Toast
+      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/ExecResultV0/
+        title: ExecResultV0
+      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/BackendV0/
+        title: BackendV0  
 - title: Dockerfile reference
   path: /engine/reference/builder/
 - sectiontitle: Compose file reference
   section:
     - path: /compose/compose-file/
       title: Compose Specification
-    - path: /compose/compose-file/compose-file-v3/
-      title: Version 3
-    - path: /compose/compose-file/compose-file-v2/
-      title: Version 2
-    - path: /compose/compose-file/compose-versioning/
-      title: About versions and upgrading
+    - path: /compose/compose-file/build/
+      title: Compose file build
+    - path: /compose/compose-file/deploy/
+      title: Compose file deploy
     - path: /compose/faq/
       title: Frequently asked questions
+    - sectiontitle: Legacy versions
+      section:
+        - path: /compose/compose-file/compose-versioning/
+          title: About versions and upgrading
+        - path: /compose/compose-file/compose-file-v3/
+          title: Version 3
+        - path: /compose/compose-file/compose-file-v2/
+          title: Version 2
 - sectiontitle: Drivers and specifications
   section:
   - sectiontitle: Registry image manifests
@@ -1140,18 +1194,6 @@ manuals:
           title: Logs and troubleshooting
         - path: /desktop/mac/apple-silicon/
           title: Apple silicon
-        - path: /desktop/mac/release-notes/
-          title: Release notes
-        - sectiontitle: Previous versions
-          section:
-          - path: /desktop/mac/release-notes/3.x/
-            title: Desktop for Mac 3.x
-          - path: /desktop/mac/release-notes/2.x/
-            title: Desktop for Mac 2.x
-          - path: /desktop/mac/release-notes/edge-releases/
-            title: Edge releases
-          - path: /desktop/mac/release-notes/archive/
-            title: Older versions
     - sectiontitle: Windows
       section:
         - path: /desktop/windows/install/
@@ -1164,22 +1206,96 @@ manuals:
           title: Logs and troubleshooting
         - path: /desktop/windows/wsl/
           title: Docker Desktop WSL 2 backend
-        - path: /desktop/windows/release-notes/
-          title: Release notes
-        - sectiontitle: Previous versions
+    - sectiontitle: Linux
+      section:
+        - path: /desktop/linux/install/
+          title: Install Docker Desktop for Linux
+        - sectiontitle: Installation per distro
           section:
-            - path: /desktop/windows/release-notes/3.x/
-              title: Desktop for Windows 3.x
-            - path: /desktop/windows/release-notes/2.x/
-              title: Desktop for Windows 2.x
-            - path: /desktop/windows/release-notes/edge-releases/
-              title: Edge releases
-            - path: /desktop/windows/release-notes/archive/
-              title: Older versions
+            - path: /desktop/linux/install/debian/
+              title: Install on Debian
+            - path: /desktop/linux/install/fedora/
+              title: Install on Fedora
+            - path: /desktop/linux/install/ubuntu/
+              title: Install on Ubuntu
+            - path: /desktop/linux/install/archlinux/
+              title: Install on Arch
+        - path: /desktop/linux/
+          title: User manual
+        - path: /desktop/linux/networking/
+          title: Networking
+        - path: /desktop/linux/space/
+          title: Disk utilization
+        - path: /desktop/linux/troubleshoot/
+          title: Logs and troubleshooting    
     - path: /desktop/dashboard/
       title: Dashboard
     - path: /desktop/dev-environments/
       title: Dev Environments (Preview)
+    - path: /desktop/extensions/
+      title: Extensions (Beta)
+    - sectiontitle: Extensions SDK (Beta)
+      section:
+        - path: /desktop/extensions-sdk/
+          title: Introduction
+        - sectiontitle: Tutorials
+          section:
+            - title: Create your first extension
+              path: /desktop/extensions-sdk/tutorials/initialize/
+            - title: Create a minimal frontend extension
+              path: /desktop/extensions-sdk/tutorials/minimal-frontend-extension/
+            - title: Create a ReactJS-based extension
+              path: /desktop/extensions-sdk/tutorials/react-extension/
+            - title: Create a minimal extension invoking docker commands
+              path: /desktop/extensions-sdk/tutorials/minimal-frontend-using-docker-cli/
+            - title: Create a minimal backend extension
+              path: /desktop/extensions-sdk/tutorials/minimal-backend-extension/
+        - sectiontitle: Design
+          section:
+             - title: Guidelines
+               path: /desktop/extensions-sdk/design/design-guidelines/
+             - title: Docker's design principles
+               path: /desktop/extensions-sdk/design/design-principles/
+        - sectiontitle: UI Styling
+          section:
+             - title: Overview
+               path: /desktop/extensions-sdk/design/overview/
+             - title: MUI best practices
+               path: /desktop/extensions-sdk/design/mui-best-practices/
+        - sectiontitle: Developer SDK tools
+          section:
+            - title: Overview
+              path: /desktop/extensions-sdk/dev/overview/
+            - title: CLI overview
+              path: /desktop/extensions-sdk/dev/cli/usage/
+            - title: Build, test and install an extension
+              path: /desktop/extensions-sdk/dev/cli/build-test-install-extension/
+        - sectiontitle: Publishing extensions
+          section:
+            - title: Metadata
+              path: /desktop/extensions-sdk/extensions/METADATA/
+            - title: Labels
+              path: /desktop/extensions-sdk/extensions/labels/
+            - title: Validation
+              path: /desktop/extensions-sdk/extensions/validation/
+            - title: Distribution
+              path: /desktop/extensions-sdk/extensions/DISTRIBUTION/
+            - title: Building multi-arch extensions
+              path: /desktop/extensions-sdk/extensions/multi-arch/
+        - sectiontitle: Extension APIs
+          section:
+            - title: Overview
+              path: /desktop/extensions-sdk/dev/api/overview/
+            - title: Extension Backend
+              path: /desktop/extensions-sdk/dev/api/backend/
+            - title: Docker
+              path: /desktop/extensions-sdk/dev/api/docker/
+            - title: Dashboard
+              path: /desktop/extensions-sdk/dev/api/dashboard/
+            - title: Navigation
+              path: /desktop/extensions-sdk/dev/api/dashboard-routes-navigation/
+            - title: API Reference
+              path: /desktop/extensions-sdk/dev/api/reference/README/
     - path: /desktop/multi-arch/
       title: Multi-arch support
     - path: /desktop/kubernetes/
@@ -1188,7 +1304,26 @@ manuals:
       title: FAQs
     - path: /desktop/backup-and-restore/
       title: Back up and restore data
-
+    - path: /desktop/release-notes/
+      title: Release notes
+    - sectiontitle: Previous versions
+      section:
+      - path: /desktop/previous-versions/3.x-windows/
+        title: Desktop for Windows 3.x
+      - path: /desktop/previous-versions/3.x-mac/
+        title: Desktop for Mac 3.x
+      - path: /desktop/previous-versions/2.x-windows/
+        title: Desktop for Windows 2.x
+      - path: /desktop/previous-versions/2.x-mac/
+        title: Desktop for Mac 2.x
+      - path: /desktop/previous-versions/edge-releases-windows/
+        title: Windows edge releases
+      - path: /desktop/previous-versions/edge-releases-mac/
+        title: Mac edge releases
+      - path: /desktop/previous-versions/archive-windows/
+        title: Older versions for Windows
+      - path: /desktop/previous-versions/archive-mac/
+        title: Older versions for Mac
 - sectiontitle: Docker Engine
   section:
   - path: /engine/
@@ -1255,26 +1390,28 @@ manuals:
       title: Engine 1.13 and earlier
   - path: /engine/deprecated/
     title: Deprecated features
-
   - path: /buildx/working-with-buildx/
     title: Docker Buildx
   - path: /engine/context/working-with-contexts/
     title: Docker Context
   - path: /engine/scan/
     title: Docker Scan
-
+  - path: /engine/sbom/
+    title: Docker SBOM (Experimental)
 - sectiontitle: Docker Compose
   section:
   - path: /compose/
     title: Overview of Docker Compose
-  - sectiontitle: Compose V2
+  - sectiontitle: Install Compose
     section:
-    - path: /compose/cli-command/
-      title: Overview
-    - path: /compose/cli-command-compatibility/
-      title: Compose v2 compatibility
-  - path: /compose/install/
-    title: Install Compose
+      - path: /compose/install/
+        title: Install Docker Compose 
+      - path: /compose/install/compose-desktop/
+        title: Install Compose plugin through Desktop 
+      - path: /compose/install/compose-plugin/
+        title: Install Docker Compose Plugin 
+      - path: /compose/install/uninstall/ 
+        title: Uninstall Docker Compose
   - path: /compose/gettingstarted/
     title: Getting started
   - path: /compose/environment-variables/
@@ -1297,6 +1434,8 @@ manuals:
     title: Sample apps with Compose
   - path: /compose/release-notes/
     title: Release notes
+  - path: /compose/cli-command-compatibility/
+    title: Compose v2 compatibility
 
 - sectiontitle: Docker Hub
   section:
@@ -1322,12 +1461,6 @@ manuals:
         title: Link to GitHub and BitBucket
   - path: /docker-hub/webhooks/
     title: Webhooks
-  - path: /docker-hub/slack_integration/
-    title: Slack integration
-  - path: /docker-hub/orgs/
-    title: Teams and organizations
-  - path: /docker-hub/image-access-management/
-    title: Image Access Management
   - path: /docker-hub/vulnerability-scanning/
     title: Vulnerability scanning
   - path: /docker-hub/audit-log/
@@ -1346,26 +1479,22 @@ manuals:
             title: Recover your Docker Hub account
           - path: /docker-hub/2fa/new-recovery-code/
             title: Generate a new recovery code
-      - sectiontitle: Single-Sign-on
-        section:
-          -  path: /single-sign-on/
-             title: Configure
-          -  path: /single-sign-on/faqs/
-             title: FAQs
   - path: /docker-hub/download-rate-limit/
     title: Download rate limit
   - sectiontitle: Administration
     section:
-     - path: /docker-hub/configure-sign-in/
-       title: Configure sign in
      - path: /docker-hub/image-management/
        title: Advanced Image Management dashboard
      - path: /docker-hub/convert-account/
        title: Convert an account into an organization
      - path: /docker-hub/deactivate-account/
        title: Deactivate an account or an organization
-  - path: /docker-hub/publish/
-    title: Docker Verified Publisher Program
+  - sectiontitle: Docker Verified Publisher Program
+    section:
+      - path: /docker-hub/publish/
+        title: Overview
+      - path: /docker-hub/publish/publisher-center-migration/
+        title: Migrate content from the Publisher Center
   - path: /docker-hub/release-notes/
     title: Release notes
 
@@ -1381,6 +1510,29 @@ manuals:
     title: Add seats
   - path: /subscription/remove-seats/
     title: Remove seats
+
+- sectiontitle: Administration
+  section:
+  - sectiontitle: Onboarding
+    section:
+    - path: /docker-hub/onboard-business/
+      title: Get started with Business
+    - path: /docker-hub/onboarding-faqs/
+      title: FAQs
+  - path: /docker-hub/orgs/
+    title: Teams and organizations
+  - path: /docker-hub/configure-sign-in/
+    title: Enforce sign in
+  - sectiontitle: Single-Sign-on
+    section:
+      -  path: /single-sign-on/
+         title: Configure
+      -  path: /single-sign-on/faqs/
+         title: FAQs
+  - path: /docker-hub/image-access-management/
+    title: Image Access Management
+  - path: /docker-hub/registry-access-management/
+    title: Registry Access Management
 
 - sectiontitle: Security
   section:

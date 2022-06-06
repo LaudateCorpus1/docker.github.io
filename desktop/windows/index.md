@@ -14,8 +14,6 @@ redirect_from:
 - /winkit/getting-started/
 
 title: Docker Desktop for Windows user manual
-toc_min: 1
-toc_max: 2
 ---
 
 Welcome to Docker Desktop! The Docker Desktop for Windows user manual provides information on how to configure and manage your Docker Desktop settings.
@@ -56,7 +54,7 @@ troubleshoot the application. Clear the check box to opt out. Docker may periodi
 
 - **Open Docker Desktop dashboard at startup**: Automatically opens the dashboard when starting Docker Desktop.
 
-- **Use Docker Compose V2**: Select this option to enable the `docker-compose` command to use Docker Compose V2. For more information, see [Docker Compose V2](../../compose/cli-command.md).
+- **Use Docker Compose V2**: Select this option to enable the `docker-compose` command to use Docker Compose V2. For more information, see [Docker Compose V2](../../compose/index.md#compose-v2-and-the-new-docker-compose-command).
 
 ### Resources
 
@@ -144,7 +142,7 @@ containers. Alternatively, you can opt not to share it by selecting **Cancel**.
 
 #### Proxies
 
-Docker Desktop lets you configure HTTP/HTTPS Proxy Settings and
+Docker Desktop detects the HTTP/HTTPS proxy settings and
 automatically propagates these to Docker. For example, if you set your proxy
 settings to `http://proxy.example.com`, Docker uses this proxy when pulling containers.
 
@@ -174,30 +172,16 @@ see [Set environment variables](/engine/reference/commandline/run/#set-environme
 
 You can configure Docker Desktop networking to work on a virtual private network (VPN). Specify a network address translation (NAT) prefix and subnet mask to enable Internet connectivity.
 
-**DNS Server**: You can configure the DNS server to use dynamic or static IP addressing.
-
-> **Note**
->
-> Some users reported problems connecting to Docker Hub on Docker Desktop. This would manifest as an error when trying to run
-`docker` commands that pull images from Docker Hub that are not already
-downloaded, such as a first time run of `docker run hello-world`. If you
-encounter this, reset the DNS server to use the Google DNS fixed address:
-`8.8.8.8`. For more information, see
-[Networking issues](troubleshoot.md#networking-issues) in Troubleshooting.
-
-Updating these settings requires a reconfiguration and reboot of the Linux VM.
-
 #### WSL Integration
 
 In WSL 2 mode, you can configure which WSL 2 distributions will have the Docker 
 WSL integration.
 
-By default, the integration will be enabled on your default WSL distribution. 
+By default, the integration will be enabled on your default WSL distribution.
 To change your default WSL distro, run `wsl --set-default <distro name>`. (For example, 
 to set Ubuntu as your default WSL distro, run `wsl --set-default ubuntu`).
 
-You can also select any additional distributions you would like to enable the WSL 2 
-integration on.
+You can also select any additional distributions you would like to enable the WSL 2 integration on.
 
 For more details on configuring Docker Desktop to use WSL 2, see 
 [Docker Desktop WSL 2 backend](wsl.md).
@@ -415,8 +399,8 @@ in the Docker Engine topics.
 ### How do I add client certificates?
 
 You can add your client certificates
-in `~/.docker/certs.d/<MyRegistry>:<Port>/client.cert` and
-`~/.docker/certs.d/<MyRegistry>:<Port>/client.key`. You do not need to push your certificates with `git` commands.
+in `~/.docker/certs.d/<MyRegistry><Port>/client.cert` and
+`~/.docker/certs.d/<MyRegistry><Port>/client.key`. You do not need to push your certificates with `git` commands.
 
 When the Docker Desktop application starts, it copies the
 `~/.docker/certs.d` folder on your Windows system to the `/etc/docker/certs.d`

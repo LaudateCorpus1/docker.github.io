@@ -16,9 +16,7 @@ redirect_from:
 >
 > Commercial use of Docker Desktop in larger enterprises (more than 250
 > employees OR more than $10 million USD in annual revenue) now requires a paid
-> subscription. The grace period for those that will require a paid subscription
-> ends on January 31, 2022. [Learn more](https://www.docker.com/blog/the-grace-period-for-the-docker-subscription-service-agreement-ends-soon-heres-what-you-need-to-know/){:
- target="_blank" rel="noopener" class="_" id="dkr_docs_cta"}.
+> subscription.
 {: .important}
 
 Welcome to Docker Desktop for Windows. This page contains information about Docker Desktop for Windows system requirements, download URL, instructions to install and update Docker Desktop for Windows.
@@ -41,7 +39,7 @@ Your Windows machine must meet the following requirements to successfully instal
 ### WSL 2 backend
 
 - Windows 11 64-bit: Home or Pro version 21H2 or higher, or Enterprise or Education version 21H2 or higher.
-- Windows 10 64-bit: Home or Pro 2004 (build 19041) or higher, or Enterprise or Education 1909 (build 18363) or higher.
+- Windows 10 64-bit: Home or Pro 21H1 (build 19043) or higher, or Enterprise or Education 20H2 (build 19042) or higher.
 - Enable the WSL 2 feature on Windows. For detailed instructions, refer to the
     [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10){: target="_blank" rel="noopener" class="_"}.
 - The following hardware prerequisites are required to successfully run
@@ -60,9 +58,9 @@ WSL 2 on Windows 10 or Windows 11:
 ### Hyper-V backend and Windows containers
 
 - Windows 11 64-bit: Pro version 21H2 or higher, or Enterprise or Education version 21H2 or higher.
-- Windows 10 64-bit: Pro 2004 (build 19041) or higher, or Enterprise or Education 1909 (build 18363) or higher.
+- Windows 10 64-bit: Pro 21H1 (build 19043) or higher, or Enterprise or Education 20H2 (build 19042) or higher.
 
-  For Windows 10 and Windows 11 Home, see [System requirements for WSL 2 backend](#wsl-2-backend).
+  For Windows 10 and Windows 11 Home, see the system requirements in the [WSL 2 backend](#wsl-2-backend){: data-toggle="tab"  data-target="#win-wsl2" } tab.
 - Hyper-V and Containers Windows features must be enabled.
 - The following hardware prerequisites are required to successfully run Client
 Hyper-V on Windows 10:
@@ -102,6 +100,8 @@ Looking for information on using Windows containers?
 
 ## Install Docker Desktop on Windows
 
+### Install interactively
+
 1. Double-click **Docker Desktop Installer.exe** to run the installer.
 
     If you haven't already downloaded the installer (`Docker Desktop Installer.exe`), you can get it from
@@ -109,7 +109,9 @@ Looking for information on using Windows containers?
     It typically downloads to your `Downloads` folder, or you can run it from
     the recent downloads bar at the bottom of your web browser.
 
-2. When prompted, ensure the **Enable Hyper-V Windows Features** or the **Install required Windows components for WSL 2** option is selected on the Configuration page.
+2. When prompted, ensure the **Use WSL 2 instead of Hyper-V** option on the Configuration page is selected or not depending on your choice of backend.
+
+    If your system only supports one of the two options, you will not be able to select which backend to use.
 
 3. Follow the instructions on the installation wizard to authorize the installer and proceed with the install.
 
@@ -117,6 +119,37 @@ Looking for information on using Windows containers?
 
 5. If your admin account is different to your user account, you must add the user to the **docker-users** group. Run **Computer Management** as an **administrator** and navigate to **Local Users and Groups** > **Groups** > **docker-users**. Right-click to add the user to the group.
 Log out and log back in for the changes to take effect.
+
+### Install from the command line
+
+After downloading **Docker Desktop Installer.exe**, run the following command in a terminal to install Docker Desktop:
+
+```
+"Docker Desktop Installer.exe" install
+```
+
+If you’re using PowerShell you should run it as:
+
+```
+Start-Process '.\win\build\Docker Desktop Installer.exe' -Wait install
+```
+
+If using the Windows Command Prompt:
+
+```
+start /w "" "Docker Desktop Installer.exe" install
+```
+
+The install command accepts the following flags:
+- `--quiet`: suppresses information output when running the installer
+- `--accept-license`: accepts the [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement){: target="_blank" rel="noopener" class="_"} now, rather than requiring it to be accepted when the application is first run
+- `--allowed-org=<org name>`: requires the user to sign in and be part of the specified Docker Hub organization when running the application
+- `--backend=<backend name>`: selects the backend to use for Docker Desktop, `hyper-v` or `wsl-2` (default)
+
+If your admin account is different to your user account, you must add the user to the **docker-users** group:
+```
+net localgroup docker-users <user> /add
+```
 
 ## Start Docker Desktop
 

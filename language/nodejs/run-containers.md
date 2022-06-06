@@ -14,7 +14,7 @@ Work through the steps to build a Node JS image in [Build your Node image](build
 
 ## Overview
 
-In the previous module we created our sample application and then we created  a Dockerfile that we used to create an image. We created our image using the command `docker build`. Now that we have an image, we can run that image and see if our application is running correctly.
+In the previous module we created our sample application and then we created a Dockerfile that we used to create an image. We created our image using the command `docker build`. Now that we have an image, we can run that image and see if our application is running correctly.
 
 A container is a normal operating system process except that this process is isolated and has its own file system, its own networking, and its own isolated process tree separate from the host.
 
@@ -95,7 +95,7 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 ce02b3179f0f        node-docker         "docker-entrypoint.s…"   6 minutes ago       Up 6 minutes        0.0.0.0:8000->8000/tcp   wonderful_kalam
 ```
 
-The `ps` command tells a bunch of stuff about our running containers. We can see the Container ID, The image running inside the container, the command that was used to start the container, when it was created, the status, ports that exposed and the name of the container.
+The `ps` command tells a bunch of stuff about our running containers. We can see the Container ID, the image running inside the container, the command that was used to start the container, when it was created, the status, ports that exposed and the name of the container.
 
 You are probably wondering where the name of our container is coming from. Since we didn’t provide a name for the container when we started it, Docker generated a random name. We’ll fix this in a minute but first we need to stop the container. To stop the container, run the `docker stop` command which does just that, stops the container. You will need to pass the name of the container or you can use the container id.
 
@@ -162,7 +162,7 @@ ec45285c456d        node-docker         "docker-entrypoint.s…"   31 minutes ag
 fb7a41809e5d        node-docker         "docker-entrypoint.s…"   40 minutes ago      Exited (0) 39 minutes ago                            goofy_khayyam
 ```
 
-To remove a container, simple run the `docker rm` command passing the container name. You can pass multiple container names to the command in one command.
+To remove a container, simply run the `docker rm` command passing the container name. You can pass multiple container names to the command in one command.
 
 Again, make sure you replace the containers names in the below command with the container names from your system.
 
@@ -175,7 +175,7 @@ goofy_khayyam
 
 Run the `docker ps --all` command again to see that all containers are gone.
 
-Now let’s address the pesky random name issue. Standard practice is to name your containers for the simple reason that it is easier to identify what is running in the container and what application or service it is associated with. Just like good naming conventions for variables in your code makes it simpler to read. So goes naming your containers.
+Now let’s address the pesky random name issue. Standard practice is to name your containers for the simple reason that it is easier to identify what is running in the container and what application or service it is associated with. Just like good naming conventions for variables in your code make it simpler to read, so does naming your containers.
 
 To name a container, we just need to pass the `--name` flag to the run command.
 

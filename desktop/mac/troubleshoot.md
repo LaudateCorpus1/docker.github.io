@@ -5,7 +5,6 @@ redirect_from:
 - /docker-for-mac/troubleshoot/
 - /mackit/troubleshoot/
 title: Logs and troubleshooting
-toc_max: 2
 ---
 
 {% include upgrade-cta.html
@@ -70,7 +69,7 @@ the log data. Before reporting an issue, we recommend that you read the informat
 Before you get started, we recommend that you sign into your Docker Desktop application and your [Docker Hub](https://hub.docker.com/){:target="_blank" rel="noopener" class="_"} account.
 
 1. Choose ![whale menu](images/whale-x.png){: .inline} > **Troubleshoot**.
-2. Sign into Docker Desktop. In addition, ensure you are signed into your [Docker account](https://hub.docker.com/){:target="_blank" rel="noopener" class="_"}.
+2. Optional: Sign into Docker Desktop. In addition, ensure you are signed into your [Docker account](https://hub.docker.com/){:target="_blank" rel="noopener" class="_"}.
 3. Click **Get support**. This opens the in-app **Support** page and starts collecting the diagnostics.
     ![Diagnose & Feedback](images/diagnose-support.png){:width="600px"}
 4. When the diagnostics collection process is complete, click **Upload to get a Diagnostic ID**.
@@ -115,6 +114,8 @@ To view the contents of the diagnostic file, run:
 ```console
 $ open /tmp/BE9AFAAF-F68B-41D0-9D12-84760E6B8740/20190905152051.zip
 ```
+
+If you have a paid Docker subscription, open the [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"} form. Fill in the information required and add the ID to the Diagnostics ID field. Click **Submit** to request Docker Desktop support.
 
 ### Self-diagnose tool
 

@@ -10,7 +10,7 @@ toc_max: 2
 
 ## Overview
 
-The Docker Compose CLI enables developers to use native Docker commands to run applications in Amazon EC2 Container Service (ECS) when building cloud-native applications.
+The Docker Compose CLI enables developers to use native Docker commands to run applications in Amazon Elastic Container Service (ECS) when building cloud-native applications.
 
 The integration between Docker and Amazon ECS allows developers to use the Docker Compose CLI to:
 
@@ -228,7 +228,7 @@ $ docker secret create dockerhubAccessToken token.json
 arn:aws:secretsmanager:eu-west-3:12345:secret:DockerHubAccessToken
 ```
 
-Once created, you can use this ARN in you Compose file using using `x-aws-pull_credentials` custom extension with the Docker image URI for your service.
+Once created, you can use this ARN in your Compose file using `x-aws-pull_credentials` custom extension with the Docker image URI for your service.
 
 ```yaml
 services:

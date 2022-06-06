@@ -13,14 +13,137 @@ redirect_from:
 This document describes the latest changes, additions, known issues, and fixes
 for Docker Engine.
 
-> **Note:**
-> The client and container runtime are now in separate packages from the daemon
-> in Docker Engine 18.09. Users should install and update all three packages at
-> the same time to get the latest patch releases. For example, on Ubuntu:
-> `sudo apt install docker-ce docker-ce-cli containerd.io`. See the install
-> instructions for the corresponding linux distro for details.
-
 # Version 20.10
+
+## 20.10.16
+2022-05-12
+
+This release of Docker Engine fixes a regression in the Docker CLI builds for
+macOS, fixes an issue with `docker stats` when using containerd 1.5 and up,
+and updates the Go runtime to include a fix for [CVE-2022-29526](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-29526){:target="_blank" rel="noopener"}.
+
+### Client
+
+- Fixed a regression in binaries for macOS introduced in [20.10.15](#201015), which
+  resulted in a panic [docker/cli#43426](https://github.com/docker/cli/pull/3592){:target="_blank" rel="noopener"}.
+- Update golang.org/x/sys dependency which contains a fix for
+  [CVE-2022-29526](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-29526){:target="_blank" rel="noopener"}.
+
+### Daemon
+
+- Fixed an issue where `docker stats` was showing empty stats when running with
+  containerd 1.5.0 or up [moby/moby#43567](https://github.com/moby/moby/pull/43567){:target="_blank" rel="noopener"}.
+- Updated the `golang.org/x/sys` build-time dependency which contains a fix for [CVE-2022-29526](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-29526){:target="_blank" rel="noopener"}.
+
+### Packaging
+
+- Updated Go runtime to [1.17.10](https://go.dev/doc/devel/release#go1.17.minor){:target="_blank" rel="noopener"},
+  which contains a fix for [CVE-2022-29526](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-29526){:target="_blank" rel="noopener"}.
+- Used "weak" dependencies for the `docker scan` CLI plugin, to prevent a
+  "conflicting requests" error when users performed an off-line installation from
+  downloaded RPM packages [docker/docker-ce-packaging#659](https://github.com/docker/docker-ce-packaging/pull/659){:target="_blank" rel="noopener"}.
+
+## 20.10.15
+2022-05-05
+
+This release of Docker Engine comes with updated versions of the `compose`,
+`buildx`, `containerd`, and `runc` components, as well as some minor bug fixes.
+
+> **Known issues**
+> 
+> We've identified an issue with the [macOS CLI binaries](https://download.docker.com/mac/static/stable/){:target="_blank" rel="noopener" class="_"}
+> in the 20.10.15 release. This issue has been resolved in the [20.10.16](#201016) release.
+{:.important}
+
+### Daemon
+
+- Use a RWMutex for stateCounter to prevent potential locking congestion [moby/moby#43426](https://github.com/moby/moby/pull/43426).
+- Prevent an issue where the daemon was unable to find an available IP-range in
+  some conditions [moby/moby#43360](https://github.com/moby/moby/pull/43360) 
+
+### Packaging
+
+- Update Docker Compose to [v2.5.0](https://github.com/docker/compose/releases/tag/v2.5.0).
+- Update Docker Buildx to [v0.8.2](https://github.com/docker/buildx/releases/tag/v0.8.2).
+- Update Go runtime to [1.17.9](https://go.dev/doc/devel/release#go1.17.minor).
+- Update containerd (`containerd.io` package) to [v1.6.4](https://github.com/containerd/containerd/releases/tag/v1.6.4).
+- Update runc version to [v1.1.1](https://github.com/opencontainers/runc/releases/tag/v1.1.1).
+- Add packages for CentOS 9 stream and Fedora 36.
+
+## 20.10.14
+2022-03-23
+
+This release of Docker Engine updates the default inheritable capabilities for
+containers to address [CVE-2022-24769](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-24769),
+a new version of the `containerd.io` runtime is also included to address the same
+issue.
+
+### Daemon
+
+- Update the default inheritable capabilities.
+
+### Builder
+
+- Update the default inheritable capabilities for containers used during build.
+
+### Packaging
+
+- Update containerd (`containerd.io` package) to [v1.5.11](https://github.com/containerd/containerd/releases/tag/v1.5.11).
+- Update `docker buildx` to [v0.8.1](https://github.com/docker/buildx/releases/tag/v0.8.1).
+
+## 20.10.13
+2022-03-10
+
+This release of Docker Engine contains some bug-fixes and packaging changes,
+updates to the `docker scan` and `docker buildx` commands, an updated version of
+the Go runtime, and new versions of the `containerd.io` runtime.
+Together with this release, we now also provide `.deb` and `.rpm` packages of
+Docker Compose V2, which can be installed using the (optional) `docker-compose-plugin`
+package.
+
+### Builder
+
+- Updated the bundled version of buildx to [v0.8.0](https://github.com/docker/buildx/releases/tag/v0.8.0).
+
+### Daemon
+
+- Fix a race condition when updating the container's state [moby/moby#43166](https://github.com/moby/moby/pull/43166).
+- Update the etcd dependency to prevent the daemon from incorrectly holding file locks [moby/moby#43259](https://github.com/moby/moby/pull/43259)
+- Fix detection of user-namespaces when configuring the default `net.ipv4.ping_group_range` sysctl [moby/moby#43084](https://github.com/moby/moby/pull/43084).
+
+### Distribution
+
+- Retry downloading image-manifests if a connection failure happens during image
+  pull [moby/moby#43333](https://github.com/moby/moby/pull/43333).
+
+### Documentation
+
+- Various fixes in command-line reference and API documentation.
+
+### Logging
+
+- Prevent an OOM when using the "local" logging driver with containers that produce
+  a large amount of log messages [moby/moby#43165](https://github.com/moby/moby/pull/43165).
+- Updates the fluentd log driver to prevent a potential daemon crash, and prevent
+  containers from hanging when using the `fluentd-async-connect=true` and the
+  remote server is unreachable [moby/moby#43147](https://github.com/moby/moby/pull/43147).
+
+### Packaging
+
+- Provide `.deb` and `.rpm` packages for Docker Compose V2. [Docker Compose v2.3.3](https://github.com/docker/compose/releases/tag/v2.3.3)
+  can now be installed on Linux using the `docker-compose-plugin` packages, which
+  provides the `docker compose` subcommand on the Docker CLI. The Docker Compose
+  plugin can also be installed and run standalone to be used as a drop-in replacement
+  for `docker-compose` (Docker Compose V1) [docker/docker-ce-packaging#638](https://github.com/docker/docker-ce-packaging/pull/638).
+  The `compose-cli-plugin` package can also be used on older version of the Docker
+  CLI with support for CLI plugins (Docker CLI 18.09 and up).
+- Provide packages for the upcoming Ubuntu 22.04 "Jammy Jellyfish" LTS release [docker/docker-ce-packaging#645](https://github.com/docker/docker-ce-packaging/pull/645), [docker/containerd-packaging#271](https://github.com/docker/containerd-packaging/pull/271).
+- Update `docker buildx` to [v0.8.0](https://github.com/docker/buildx/releases/tag/v0.8.0).
+- Update `docker scan` (`docker-scan-plugin`) to [v0.17.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.17.0).
+- Update containerd (`containerd.io` package) to [v1.5.10](https://github.com/containerd/containerd/releases/tag/v1.5.10).
+- Update the bundled runc version to [v1.0.3](https://github.com/opencontainers/runc/releases/tag/v1.0.3).
+- Update Golang runtime to Go 1.16.15.
+
 
 ## 20.10.12
 2021-12-13

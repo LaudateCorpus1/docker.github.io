@@ -7,7 +7,7 @@ redirect_from:
 ---
 
 This quick-start guide demonstrates how to use Docker Compose to set up and run a simple Django/PostgreSQL app. Before starting,
-[install Compose](../compose/install.md).
+[install Compose](../compose/install/index.md).
 
 ### Define the project components
 
@@ -76,7 +76,7 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
        volumes:
          - ./data/db:/var/lib/postgresql/data
        environment:
-         - POSTGRES_NAME=postgres
+         - POSTGRES_DB=postgres
          - POSTGRES_USER=postgres
          - POSTGRES_PASSWORD=postgres
      web:
@@ -133,6 +133,7 @@ In this step, you create a Django starter project by building the image from the
    $ ls -l
 
    drwxr-xr-x 2 root   root   composeexample
+   drwxr-xr-x 3 root   root   data
    -rw-rw-r-- 1 user   user   docker-compose.yml
    -rw-rw-r-- 1 user   user   Dockerfile
    -rwxr-xr-x 1 root   root   manage.py
@@ -142,9 +143,11 @@ In this step, you create a Django starter project by building the image from the
    If you are running Docker on Linux, the files `django-admin` created are
    owned by root. This happens because the container runs as the root user.
    Change the ownership of the new files.
+   
+   Do not change the permission of the data folder where Postgres has its file, otherwise Postgres will not be able to start due to permission issues.
 
    ```console
-   $ sudo chown -R $USER:$USER .
+   $ sudo chown -R $USER:$USER composeexample manage.py
    ```
 
    If you are running Docker on Mac or Windows, you should already
@@ -283,7 +286,7 @@ In this section, you set up the database connection for Django.
 ## More Compose documentation
 
 - [Docker Compose overview](../compose/index.md)
-- [Install Docker Compose](../compose/install.md)
+- [Install Docker Compose](../compose/install/index.md)
 - [Getting Started with Docker Compose](../compose/gettingstarted.md)
 - [Docker Compose Command line reference](../compose/reference/index.md)
 - [Compose file reference](../compose/compose-file/index.md)

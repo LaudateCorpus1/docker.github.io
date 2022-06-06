@@ -14,15 +14,13 @@ multiple nodes concurrently.
 
 ## Install
 
-### Windows and macOS
+### Docker Desktop
 
-Docker Buildx is included in [Docker Desktop](../desktop/index.md) for Windows
-and macOS.
+Docker Buildx is included in [Docker Desktop](../desktop/index.md) for Windows, macOS, and Linux.
 
-### Linux packages
+### Static binaries
 
-Docker Linux packages also include Docker Buildx when installed using the
-[DEB or RPM packages](../engine/install/index.md).
+Docker Linux packages also include Docker Buildx when installed using the [DEB or RPM packages](../engine/install/index.md).
 
 ### Manual download
 
@@ -33,8 +31,8 @@ Docker Linux packages also include Docker Buildx when installed using the
 > installing buildx using manual download in production environments as they
 > will not be updated automatically with security updates.
 >
-> On Windows and macOS, we recommend that you install [Docker Desktop](../desktop/index.md)
-> instead. For Linux, we recommend that you follow the [instructions specific for your distribution](#linux-packages).
+> On Windows, macOS, and Linux we recommend that you install [Docker Desktop](../desktop/index.md)
+> instead. 
 {: .important}
 
 You can also download the latest binary from the [releases page on GitHub](https://github.com/docker/buildx/releases/latest){:target="_blank" rel="noopener" class="_"}.
@@ -184,8 +182,8 @@ it automatically loads it through a binary registered in the `binfmt_misc`
 handler.
 
 For QEMU binaries registered with `binfmt_misc` on the host OS to work
-transparently inside containers they must be registered with the `fix_binary`
-flag. This requires a kernel >= 4.8 and binfmt-support >= 2.1.7. You can check
+transparently inside containers, they must be statically compiled and registered with the `fix_binary` flag. 
+This requires a kernel >= 4.8 and binfmt-support >= 2.1.7. You can check
 for proper registration by checking if `F` is among the flags in
 `/proc/sys/fs/binfmt_misc/qemu-*`. While Docker Desktop comes preconfigured
 with `binfmt_misc` support for additional platforms, for other installations

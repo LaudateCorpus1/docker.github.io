@@ -16,7 +16,7 @@ Testing is an essential part of modern software development. Testing can mean a 
 
 ## Refactor Dockerfile to run tests
 
-The **Spring Pet Clinic** source code has already tests defined in the test directory `src/test/java/org/springframework/samples/petclinic`. You just need to update the JaCoCo version in your `pom.xml` to ensure your tests work with JDK v15 or higher with `<jacoco.version>0.8.6</jacoco.version>`, so we can use the following Docker command to start the container and run tests:
+The **Spring Pet Clinic** source code has already tests defined in the test directory `src/test/java/org/springframework/samples/petclinic`. We can use the following Docker command to start the container and run tests:
 
 ```console
 $ docker run -it --rm --name springboot-test java-docker ./mvnw test
@@ -98,7 +98,7 @@ $ docker run -it --rm --name springboot-test java-docker
 
 The build output is truncated, but you can see that the Maven test runner was successful and all our tests passed.
 
-This is great. However, we'll have to run two Docker commands to build and run our tests. We can improve this slightly by using a `RUN` statement instead of the `CMD` statement in the test stage. The `CMD` statement is not executed during the building of the image, but is executed when you run the image in a container. When using the `RUN` statement, our tests run when the building the image, and stop the build when they fail.
+This is great. However, we'll have to run two Docker commands to build and run our tests. We can improve this slightly by using a `RUN` statement instead of the `CMD` statement in the test stage. The `CMD` statement is not executed during the building of the image, but is executed when you run the image in a container. When using the `RUN` statement, our tests run when building the image, and stop the build when they fail.
 
 Update your Dockerfile with the highlighted line below.
 
@@ -149,13 +149,16 @@ $ docker build -t java-docker --target test .
 
 The build output is truncated for simplicity, but you can see that our tests ran succesfully and passed. Let’s break one of the tests and observe the output when our tests fail.
 
-Open the `src/test/java/org/springframework/samples/petclinic/model/ValidatorTests.java` file and change **line 57** to the following.
+Open the `src/test/java/org/springframework/samples/petclinic/model/ValidatorTests.java` file and change the assertion 
 
-```shell
-55   ConstraintViolation<Person> violation = constraintViolations.iterator().next();
-56   assertThat(violation.getPropertyPath().toString()).isEqualTo("firstName");
-57   assertThat(violation.getMessage()).isEqualTo("must be empty");
-58 }
+```java
+assertThat(violation.getMessage()).isEqualTo("must not be empty");
+```
+
+with the following.
+
+```java
+assertThat(violation.getMessage()).isEqualTo("must be empty");
 ```
 
 Now, run the `docker build` command from above and observe that the build fails and the failing testing information is printed to the console.
@@ -178,7 +181,7 @@ FROM base as development
 CMD ["./mvnw", "spring-boot:run", "-Dspring-boot.run.profiles=mysql", "-Dspring-boot.run.jvmArguments='-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8000'"]
 ```
 
-We can now update of our `docker-compose.dev.yml` to use this specific target to build the `petclinic` service and remove the `command` definition as follows:
+We can now update our `docker-compose.dev.yml` to use this specific target to build the `petclinic` service and remove the `command` definition as follows:
 
 ```dockerfile
 services:

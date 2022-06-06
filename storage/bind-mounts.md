@@ -29,7 +29,9 @@ In general, `--mount` is more explicit and verbose. The biggest difference is th
 the `-v` syntax combines all the options together in one field, while the `--mount`
 syntax separates them. Here is a comparison of the syntax for each flag.
 
-> **Tip**: New users should use the `--mount` syntax. Experienced users may
+> Tip
+>
+> New users should use the `--mount` syntax. Experienced users may
 > be more familiar with the `-v` or `--volume` syntax, but are encouraged to
 > use `--mount`, because research has shown it to be easier to use.
 
@@ -289,6 +291,11 @@ propagation setting has a recursive counterpoint. In the case of recursion,
 consider that `/tmp/a` is also mounted as `/foo`. The propagation settings
 control whether `/mnt/a` and/or `/tmp/a` would exist.
 
+> Warning
+>
+> Mount propagation doesn't work with Docker Desktop.
+{: .warning }
+
 | Propagation setting | Description                                                                                                                                                                                                         |
 |:--------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `shared`            | Sub-mounts of the original mount are exposed to replica mounts, and sub-mounts of replica mounts are also propagated to the original mount.                                                                         |
@@ -375,6 +382,28 @@ $ docker run -d \
   -v "$(pwd)"/target:/app:z \
   nginx:latest
 ```
+
+
+## Use a bind mount with compose
+
+A single Docker Compose service with a bind mount looks like this:
+
+```yaml
+version: "{{ site.compose_file_v3 }}"
+services:
+  frontend:
+    image: node:lts
+    volumes:
+      - type: bind
+        source: ./static
+        target: /opt/app/staticvolumes:
+  myapp:
+```
+
+For more information about using volumes of the `bind` type with Compose, see
+[Compose reference on volumes](../compose/compose-file/compose-file-v3.md#volumes).
+and
+[Compose reference on volume configuration](../compose/compose-file/compose-file-v3.md#volume-configuration-reference).
 
 ## Next steps
 

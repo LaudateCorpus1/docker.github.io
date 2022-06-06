@@ -53,8 +53,20 @@ For now, we will create the network first and attach the MySQL container at star
         -e MYSQL_DATABASE=todos \
         mysql:5.7
     ```
+    
+    If you are using an ARM based chip, e.g. Macbook M1 Chips / Apple Silicon, then use this command.
+    
+    ```console
+    $ docker run -d \
+        --network todo-app --network-alias mysql \
+        --platform "linux/amd64" \
+        -v todo-mysql-data:/var/lib/mysql \
+        -e MYSQL_ROOT_PASSWORD=secret \
+        -e MYSQL_DATABASE=todos \
+        mysql:5.7
+    ```
 
-    If you are using PowerShell then use this command.
+    If you are using Windows then use this command in PowerShell.
 
     ```powershell
     PS> docker run -d `
@@ -98,8 +110,13 @@ For now, we will create the network first and attach the MySQL container at star
     +--------------------+
     5 rows in set (0.00 sec)
     ```
+Exit the MySQL shell to return to the shell on our machine.
 
-    Hooray! We have our `todos` database and it's ready for us to use!
+   ```console
+   mysql> exit
+   ```
+
+   Hooray! We have our `todos` database and it's ready for us to use!
 
 ## Connect to MySQL
 
@@ -197,7 +214,7 @@ With all of that explained, let's start our dev-ready container!
       sh -c "yarn install && yarn run dev"
     ```
 
-    If you are using PowerShell then use this command.
+    If you are using Windows then use this command in PowerShell.
 
     ```powershell
     PS> docker run -dp 3000:3000 `
