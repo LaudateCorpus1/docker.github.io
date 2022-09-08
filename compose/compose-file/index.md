@@ -2,7 +2,7 @@
 description: Compose file reference
 keywords: fig, composition, compose, docker
 redirect_from:
-- /compose/yaml
+- /compose/yaml/
 - /compose/compose-file/compose-file-v1/
 title: Compose specification
 toc_max: 4
@@ -280,7 +280,7 @@ available resources.
 
 Deploy support is an OPTIONAL aspect of the Compose specification, and is
 described in detail in the [Deployment support](deploy.md) documentation.
-not implemented the Deploy section SHOULD be ignored and the Compose file MUST still be considered valid.
+If not implemented the Deploy section SHOULD be ignored and the Compose file MUST still be considered valid.
 
 ### build
 
@@ -427,13 +427,13 @@ cgroup_parent: m-executor-abcd
 
 ### command
 
-`command` overrides the the default command declared by the container image (i.e. by Dockerfile's `CMD`).
+`command` overrides the default command declared by the container image (i.e. by Dockerfile's `CMD`).
 
 ```
 command: bundle exec thin -p 3000
 ```
 
-The command can also be a list, in a manner similar to [Dockerfile](https://docs.docker.com/engine/reference/builder/#cmd):
+The command can also be a list, in a manner similar to [Dockerfile](../../engine/reference/builder.md#cmd):
 
 ```
 command: [ "bundle", "exec", "thin", "-p", "3000" ]
@@ -486,7 +486,7 @@ The long syntax provides more granularity in how the config is created within th
   task containers. Defaults to `/<source>` if not specified.
 - `uid` and `gid`: The numeric UID or GID that owns the mounted config file
   within the service's task containers. Default value when not specified is USER running container.
-- `mode`: The [permissions](http://permissions-calculator.org/) for the file that is mounted within the service's
+- `mode`: The [permissions](https://web.archive.org/web/20220310140126/http://permissions-calculator.org/) for the file that is mounted within the service's
   task containers, in octal notation. Default value is world-readable (`0444`).
   Writable bit MUST be ignored. The executable bit can be set.
 
@@ -737,7 +737,7 @@ entrypoint: /code/entrypoint.sh
 ```
 
 The entrypoint can also be a list, in a manner similar to
-[Dockerfile](https://docs.docker.com/engine/reference/builder/#cmd):
+[Dockerfile](../../engine/reference/builder.md#cmd):
 
 ```yml
 entrypoint:
@@ -1082,7 +1082,7 @@ been the case if `group_add` were not declared.
 
 `healthcheck` declares a check that's run to determine whether or not containers for this
 service are "healthy". This overrides
-[HEALTHCHECK Dockerfile instruction](https://docs.docker.com/engine/reference/builder/#healthcheck)
+[HEALTHCHECK Dockerfile instruction](../../engine/reference/builder.md#healthcheck)
 set by the service's Docker image.
 
 ```yml
@@ -1657,15 +1657,15 @@ the service's containers.
   service's task containers. Defaults to `source` if not specified.
 - `uid` and `gid`: The numeric UID or GID that owns the file within
   `/run/secrets/` in the service's task containers. Default value is USER running container.
-- `mode`: The [permissions](http://permissions-calculator.org/) for the file to be mounted in `/run/secrets/`
+- `mode`: The [permissions](https://web.archive.org/web/20220310140126/http://permissions-calculator.org/) for the file to be mounted in `/run/secrets/`
   in the service's task containers, in octal notation.
   Default value is world-readable permissions (mode `0444`).
   The writable bit MUST be ignored if set. The executable bit MAY be set.
 
-The following example sets the name of the `server-certificate` secret file to `server.crt`
+The following example sets the name of the `server-certificate` secret file to `server.cert`
 within the container, sets the mode to `0440` (group-readable) and sets the user and group
 to `103`. The value of `server-certificate` secret is provided by the platform through a lookup and
-the secret lifecycle not directly managed by the Compose implementation.
+the secret lifecycle is not directly managed by the Compose implementation.
 
 ```yml
 services:
@@ -1756,7 +1756,7 @@ sysctls:
 You can only use sysctls that are namespaced in the kernel. Docker does not
 support changing sysctls inside a container that also modify the host system.
 For an overview of supported sysctls, refer to [configure namespaced kernel
-parameters (sysctls) at runtime](https://docs.docker.com/engine/reference/commandline/run/#configure-namespaced-kernel-parameters-sysctls-at-runtime).
+parameters (sysctls) at runtime](/engine/reference/commandline/run/#configure-namespaced-kernel-parameters-sysctls-at-runtime).
 
 ### tmpfs
 
@@ -1876,6 +1876,7 @@ expressed in the short form.
   - `nocopy`: flag to disable copying of data from a container when a volume is created
 - `tmpfs`: configure additional tmpfs options
   - `size`: the size for the tmpfs mount in bytes (either numeric or as bytes unit)
+  - `mode`: the filemode for the tmpfs mount as Unix permission bits as an octal number
 - `consistency`: the consistency requirements of the mount. Available values are platform specific
 
 ### volumes_from
@@ -2061,6 +2062,8 @@ Compose implementations MUST set `com.docker.compose.project` and `com.docker.co
 If set to `true`, `external` specifies that this network’s lifecycle is maintained outside of that of the application.
 Compose Implementations SHOULD NOT attempt to create these networks, and raises an error if one doesn't exist.
 
+If `external` is set to `true` , then the resource is not managed by Compose. If `external` is set to `true` and the network configuration has other attributes set besides `name`, then Compose Implementations SHOULD reject the Compose file as invalid.
+
 In the example below, `proxy` is the gateway to the outside world. Instead of attempting to create a network, Compose
 implementations SHOULD interrogate the platform for an existing network simply called `outside` and connect the
 `proxy` service's containers to it.
@@ -2158,6 +2161,9 @@ volumes:
 If set to `true`, `external` specifies that this volume already exist on the platform and its lifecycle is managed outside
 of that of the application. Compose implementations MUST NOT attempt to create these volumes, and MUST return an error if they
 do not exist.
+
+If `external` is set to `true` , then the resource is not managed by Compose. If `external` is set to `true` and the network configuration has other attributes set besides `name`, then Compose Implementations SHOULD reject the Compose file as invalid.
+
 
 In the example below, instead of attempting to create a volume called
 `{project_name}_db-data`, Compose looks for an existing volume simply
@@ -2283,6 +2289,8 @@ configs:
     name: "${HTTP_CONFIG_KEY}"
 ```
 
+If `external` is set to `true` , then the resource is not managed by Compose. If `external` is set to `true` and the network configuration has other attributes set besides `name`, then Compose Implementations SHOULD reject the Compose file as invalid.
+
 Compose file need to explicitly grant access to the configs to relevant services in the application.
 
 ## Secrets top-level element
@@ -2293,19 +2301,29 @@ The top-level `secrets` declaration defines or references sensitive data that ca
 application. The source of the secret is either `file` or `external`.
 
 - `file`: The secret is created with the contents of the file at the specified path.
+- `environment`: The secret is created with the value of an environment variable.
 - `external`: If set to true, specifies that this secret has already been created. Compose implementation does
   not attempt to create it, and if it does not exist, an error occurs.
 - `name`: The name of the secret object in Docker. This field can be used to
   reference secrets that contain special characters. The name is used as is
   and will **not** be scoped with the project name.
 
-In this example, `server-certificate` is created as `<project_name>_server-certificate` when the application is deployed,
+In this example, `server-certificate` secret is created as `<project_name>_server-certificate` when the application is deployed,
 by registering content of the `server.cert` as a platform secret.
 
 ```yml
 secrets:
   server-certificate:
     file: ./server.cert
+```
+
+In this example, `token` secret  is created as `<project_name>_token` when the application is deployed,
+by registering content of the `OAUTH_TOKEN` environment variable as a platform secret.
+
+```yml
+secrets:
+  token:
+    environment: "OAUTH_TOKEN"
 ```
 
 Alternatively, `server-certificate` can be declared as external, doing so Compose implementation will lookup `server-certificate` to expose secret to relevant services.
@@ -2328,6 +2346,7 @@ secrets:
     name: "${CERTIFICATE_KEY}"
 ```
 
+If `external` is set to `true` , then the resource is not managed by Compose. If `external` is set to `true` and the network configuration has other attributes set besides `name`, then Compose Implementations SHOULD reject the Compose file as invalid.
 Compose file need to explicitly grant access to the secrets to relevant services in the application.
 
 ## Fragments

@@ -61,8 +61,8 @@ repository.
 We've made it really easy for you to file new issues.
 
 - Click **New issue** on the docs repository and fill in the details, or
-- Click **Request docs changes** in the right column of every page on
-  docs.docker.com and add the details.
+- Click **Request docs changes** in the right column of every page
+  and add the details.
 
 ![Docs feedback on each page](/opensource/images/docs-site-feedback.png)
 
@@ -71,9 +71,5 @@ We've made it really easy for you to file new issues.
 We value your contribution. We'd like to make it as easy as possible to submit
 your contributions to the Docker docs repository. Changes to the docs are
 handled through pull requests against the `master` branch. To learn how to
-contribute, see
-[CONTRIBUTING.md](https://github.com/docker/docker.github.io/blob/master/CONTRIBUTING.md).
-
-For a demo of the components, tags, Markdown syntax, styles, used in Docker
-documentation, see
-[test.md](https://github.com/docker/docker.github.io/blob/master/test.md).
+contribute, see the
+[Contribution guidelines](../contribute/overview.md).

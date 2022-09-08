@@ -11,6 +11,36 @@ known issues for each Docker Hub release.
 
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1){: target="_blank" rel="noopener" class="_"} to see what's coming next.
 
+
+## 2022-07-22
+### Enhancement
+
+You can now invite members to your organization with a CSV file containing their email addresses. The CSV file can either be a file you create for this specific purpose or one that’s extracted from another in-house system.
+
+## 2022-07-19
+
+### Enhancement
+
+SCIM is now available for organizations with a Docker Business subscription using an Azure AD identity provider.
+
+## 2022-06-23
+
+### New feature
+
+With [SCIM](scim.md), you can manage users within your Okta identity provider (IdP). In addition, you can enable SCIM on organizations that are part of the Docker Business subscription.
+
+## 2022-05-24
+
+### New feature
+
+[Registry Access Management](registry-access-management.md) is now available for all Docker Business subscriptions. When enabled, your users can access specific registries in Docker Hub.
+
+## 2022-05-03
+
+### New feature
+
+Organization owners can [invite new members](members.md#invite-members) to an organization via Docker ID or email address.
+
 ## 2021-11-15
 
 ### New
@@ -71,9 +101,9 @@ Docker introduces the Advanced Image Management dashboard that enables you to vi
 
 ### New feature
 
-Docker introduces Audit log, a new feature that allows team owners to view a list of activities that occur at organization and repository levels. This feature begins tracking the activities from the release date, that is, **from 25 January 2021**.
+Docker introduces Audit logs, a new feature that allows team owners to view a list of activities that occur at organization and repository levels. This feature begins tracking the activities from the release date, that is, **from 25 January 2021**.
 
-For more information about this feature and for instructions on how to use it, see [Audit log](audit-log.md).
+For more information about this feature and for instructions on how to use it, see [Audit logs](audit-log.md).
 
 ## 2020-11-10
 
